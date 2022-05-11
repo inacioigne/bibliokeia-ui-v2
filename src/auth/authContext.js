@@ -13,7 +13,9 @@ export function AuthProvider({ children }) {
     const { "bibliokeia.token": token } = parseCookies();
     if (token) {
       //Pegar informações do usuario
-      setUser({ name: "admin", id: 1 });
+      const payload = token.split('.')[1]
+      //console.log('TK: ', JSON.parse(window.atob(payload)))
+      setUser(JSON.parse(window.atob(payload)));
       api.defaults.headers["Authorization"] = `Bearer ${token}`;
     }
   }, []);
@@ -22,6 +24,7 @@ export function AuthProvider({ children }) {
     const response = await api.post("usuarios/login", qs.stringify(data), {
       headers: { "content-type": "application/x-www-form-urlencoded" },
     });
+
     setCookie(undefined, "bibliokeia.token", response.data.access_token, {
       // maxAge: 60 * 60 * 1,
       path: "/",
