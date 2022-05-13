@@ -15,7 +15,7 @@ import { AuthContext } from "src/auth/authContext";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import { red } from "@mui/material/colors";
 
-export default function FormLogin({ display, setVisible }) {
+export default function FormLogin({ display, setVisible, alert}) {
   const {
     control,
     handleSubmit,
@@ -32,7 +32,9 @@ export default function FormLogin({ display, setVisible }) {
 
   async function handleSignIn(data) {
     setLoading(!loading);
-    const res = await signIn(data);
+    //const res = await signIn(data);
+    signIn(data, alert, setLoading)
+   
   }
 
   return (

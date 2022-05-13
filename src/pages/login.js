@@ -1,11 +1,18 @@
-import { Container, Snackbar  } from "@mui/material/";
+import { Container, Snackbar, Alert } from "@mui/material/";
 import { useState } from "react";
 import FormLogin from "src/auth/formLogin";
 import FormRegister from "src/auth/formRegister";
 
+
 export default function Login() {
   const [visible, setVisible] = useState(0);
-  const [openSnack, setSnack] = useState(false)
+  const [openSnack, setSnack] = useState({
+    visible: false, 
+    msg: null,
+    severity: null,
+    anchorOrigin: { vertical: 'top', horizontal: 'left' }
+  })
+  console.log('SN: ', openSnack)
 
   return (
     <Container
@@ -19,6 +26,7 @@ export default function Login() {
       <FormLogin 
       display={visible} 
       setVisible={setVisible} 
+      alert={setSnack}
       />
       <FormRegister 
       display={visible} 
@@ -26,12 +34,13 @@ export default function Login() {
       alert={setSnack}
       />
       <Snackbar
-        open={openSnack}
+        open={openSnack.visible}
         autoHideDuration={6000}
-        onClose={() => {setSnack(false)}}
-        message="Usuário cadastrado com sucesso!"
-        //action={action}
-      />
+        onClose={() => {setSnack({visible: false, msg: null})}}
+        anchorOrigin={openSnack.anchorOrigin}
+      >
+        <Alert severity={openSnack.severity}>{openSnack.msg}</Alert>
+      </Snackbar>
     </Container>
   );
 }

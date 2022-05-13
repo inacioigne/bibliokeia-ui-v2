@@ -5,19 +5,15 @@ import {
   Card,
   CardHeader,
   Avatar,
-   
 } from "@mui/material/";
 import CloseIcon from "@mui/icons-material/Close";
 import { red } from "@mui/material/colors";
 import { useForm, Controller } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
 import { useContext, useState } from "react";
-import { api } from "src/services/api"
-
+import { api } from "src/services/api";
 
 export default function FormRegister({ display, setVisible, alert }) {
-
-
   const {
     control,
     handleSubmit,
@@ -26,29 +22,40 @@ export default function FormRegister({ display, setVisible, alert }) {
     defaultValues: {
       name: "",
       email: "",
-      password: ""
-      
+      password: "",
     },
   });
 
   const [loading, setLoading] = useState(false);
 
-
-
-
   async function signUp(data) {
     setLoading(!loading);
 
-    api.post("usuarios", data)
-    .then(res => {
-      if (res.status === 200) {
-        setLoading(false)
-        setVisible(0)
-        alert(true)
-
-      }
+    api
+      .post("usuarios", data)
+      .then((res) => {
+        if (res.status === 201) {
+          setLoading(false);
+          setVisible(0);
+          alert({
+            visible: true,
+            msg: 'Cadastro realizado com sucesso!',
+            severity: "success",
+            anchorOrigin: { vertical: "bottom", horizontal: "left" },
+          });
+        }
       })
-
+      .catch((error) => {
+        if (error.response.status === 409) {
+          setLoading(false);
+          alert({
+            visible: true,
+            msg: error.response.data.detail,
+            severity: "error",
+            anchorOrigin: { vertical: "top", horizontal: "center" },
+          });
+        }
+      });
   }
 
   return (
@@ -58,7 +65,6 @@ export default function FormRegister({ display, setVisible, alert }) {
           <Avatar
             onClick={() => {
               setVisible(0);
-              
             }}
             sx={{ bgcolor: red[500], cursor: "pointer" }}
           >
@@ -74,8 +80,6 @@ export default function FormRegister({ display, setVisible, alert }) {
         borderColor="secondary.main"
         //mt={5}
         pl={5}
-        
-
       >
         Cadastro
       </Typography>
@@ -95,7 +99,7 @@ export default function FormRegister({ display, setVisible, alert }) {
             />
             {errors.username?.type === "required" &&
               "Entre com o nome de usuário"}
-              <Controller
+            <Controller
               control={control}
               name="email"
               rules={{ required: true }}
@@ -113,7 +117,7 @@ export default function FormRegister({ display, setVisible, alert }) {
               )}
             />
             {errors.password && "Você esqueceu a senha"}
-            
+
             <Box
               sx={{ display: "flex", justifyContent: "center" }}
               mt={3}
@@ -131,7 +135,6 @@ export default function FormRegister({ display, setVisible, alert }) {
           </Box>
         </form>
       </Box>
-      
     </Card>
   );
 }
