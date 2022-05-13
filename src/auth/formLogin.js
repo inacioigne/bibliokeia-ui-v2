@@ -7,7 +7,8 @@ import {
   CardHeader,
   Avatar,
   Button,
-  IconButton,
+  Snackbar,
+  Alert
 } from "@mui/material/";
 import { LoadingButton } from "@mui/lab";
 import { useContext, useState } from "react";
@@ -16,6 +17,8 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import { red } from "@mui/material/colors";
 
 export default function FormLogin({ display, setVisible, alert}) {
+  const [open, setOpen] = useState(false);
+
   const {
     control,
     handleSubmit,
@@ -29,15 +32,29 @@ export default function FormLogin({ display, setVisible, alert}) {
 
   const { user, signIn } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+ 
 
   async function handleSignIn(data) {
     setLoading(!loading);
-    //const res = await signIn(data);
-    signIn(data, alert, setLoading)
-   
+    try {
+      await signIn(data);
+
+    } catch (error) {
+      setLoading(false)
+     
+      if (error.response.status === 403) {
+        setOpen(true)
+       
+        
+    }}
+    
+
+       
   }
 
   return (
+    <>
+    
     <Card sx={display === 0 ? { minWidth: 400 } : { display: "none" }}>
       <CardHeader
         action={
@@ -125,5 +142,17 @@ export default function FormLogin({ display, setVisible, alert}) {
         </Box>
       </Box>
     </Card>
+    <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => {setOpen(false)}}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        //message="Note archived"
+        //action={action}
+      >
+        <Alert severity="error">Usuário ou email incorretos</Alert>
+      </Snackbar>
+   
+    </>
   );
 }

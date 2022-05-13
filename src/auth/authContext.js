@@ -7,6 +7,8 @@ import Router from "next/router";
 export const AuthContext = createContext({});
 
 export function AuthProvider({ children }) {
+
+
   const [user, setUser] = useState();
   const isAuthenticated = !!user;
   useEffect(() => {
@@ -20,35 +22,16 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  async function signIn(data, alert, setLoading) {
-    //setLoading(true)
-    api.post("usuarios/login", qs.stringify(data), {
+  async function signIn(data) {
+    const response = await api.post("usuarios/login", qs.stringify(data), {
       headers: { "content-type": "application/x-www-form-urlencoded" },
-    })
-    .then((res) => {
-      if (res.status === 200) {
-        console.log('LG: ', res)
-        setCookie(undefined, "bibliokeia.token", res.data.access_token, {
-          // maxAge: 60 * 60 * 1,
-          path: "/",
-        })
-        setUser(res.data.user)
-        Router.push("/");
-      }
-    })
-    .catch((error) => {
-      if (error.response.status === 403) {
-        setLoading(false);
-        alert({
-          visible: true,
-          msg: error.response.data.detail,
-          severity: "error",
-          anchorOrigin: { vertical: "top", horizontal: "center" },
-        });
-      }
     });
-    
-
+    setCookie(undefined, "bibliokeia.token", response.data.access_token, {
+      // maxAge: 60 * 60 * 1,
+      path: "/",
+    });
+    setUser(response.data.user);
+    Router.push("/");
    
   }
 
@@ -62,7 +45,8 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut, 
+      }}>
       {children}
     </AuthContext.Provider>
   );
