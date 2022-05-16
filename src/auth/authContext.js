@@ -16,6 +16,7 @@ export function AuthProvider({ children }) {
     if (token) {
       //Pegar informações do usuario
       const payload = token.split(".")[1];
+      //console.log('DATA: ', payload)
       //console.log('TK: ', JSON.parse(window.atob(payload)))
       setUser(JSON.parse(window.atob(payload)));
       api.defaults.headers["Authorization"] = `Bearer ${token}`;
@@ -23,15 +24,19 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function signIn(data) {
-    const response = await api.post("usuarios/login", qs.stringify(data), {
+    const response = await api.post("token", qs.stringify(data), {
       headers: { "content-type": "application/x-www-form-urlencoded" },
     });
     setCookie(undefined, "bibliokeia.token", response.data.access_token, {
       // maxAge: 60 * 60 * 1,
       path: "/",
     });
-    setUser(response.data.user);
-    Router.push("/");
+    const { "bibliokeia.token": token } = parseCookies();
+    const payload = token.split(".")[1];
+    setUser(JSON.parse(window.atob(payload)));
+    
+    
+    Router.push("/admin/dashboard");
    
   }
 

@@ -47,14 +47,10 @@ export default function FormLogin({ display, setVisible, alert}) {
        
         
     }}
-    
-
-       
   }
 
   return (
     <>
-    
     <Card sx={display === 0 ? { minWidth: 400 } : { display: "none" }}>
       <CardHeader
         action={

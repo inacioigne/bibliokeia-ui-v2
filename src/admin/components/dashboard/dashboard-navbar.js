@@ -13,6 +13,8 @@ import { Users as UsersIcon } from "src/admin/components/icons/users";
 import { Bell as BellIcon } from "src/admin/components/icons/bell";
 import { UserCircle as UserCircleIcon } from "src/admin/components/icons/user-circle";
 import PropTypes from "prop-types";
+import { useContext } from 'react';
+import { AuthContext } from 'src/auth/authContext'
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -21,6 +23,9 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 
 export const DashboardNavbar = (props) => {
   const { onSidebarOpen, ...other } = props;
+
+  const { user } = useContext(AuthContext);
+  //console.log('USER: ', user)
 
   return (
     <>
@@ -60,6 +65,7 @@ export const DashboardNavbar = (props) => {
             </IconButton>
           </Tooltip>
           <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ color: '#121828'}}><p>{user?.sub}</p></Box>
           <Tooltip title="Contacts">
             <IconButton sx={{ ml: 1 }}>
               <UsersIcon fontSize="small" />

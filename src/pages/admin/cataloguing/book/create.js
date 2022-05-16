@@ -22,6 +22,7 @@ import Datafield from "src/admin/components/cataloguing/marc/datafield";
 import CloseIcon from "@mui/icons-material/Close";
 import Time from "src/lib/time"
 import { parseCookies } from "nookies";
+import { useRouter } from "next/router";
 
 function a11yProps(index) {
   return {
@@ -61,6 +62,8 @@ const [tag856] = schema.datafields.filter((field) => {
 });
 
 export default function CreateBook() {
+
+  const router = useRouter();
   const [value, setValue] = useState(0);
   //SNACKBAR
   const [snack, setSnack] = useState(false);
@@ -166,7 +169,7 @@ export default function CreateBook() {
       .then(function (response) {
         if (response.status == 201) {
           setsnackSuccess(true);
-          //router.push(`/cataloguing/item/${response.data.item_id}`);
+          router.push(`/admin/cataloguing/${response.data.item_id}`);
         }
         //console.log(response);
       })
@@ -174,12 +177,11 @@ export default function CreateBook() {
         console.log(error);
       });
 
-    console.log("DATA: ", marc);
+    //console.log("DATA: ", marc);
   };
 
   return (
-    <Container>
-      <Box>
+      <Box sx={{ p: 2}}>
         <Tabs
           value={value}
           onChange={(event, newValue) => {
@@ -341,7 +343,6 @@ export default function CreateBook() {
           <Alert action={action} severity="success">Item registrado com sucesso!</Alert>
         </Snackbar>
       </Box>
-    </Container>
   );
 }
 
