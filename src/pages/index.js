@@ -1,7 +1,8 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
 import { parseCookies } from "nookies";
-import Layout from "src/admin/layout"
+import Layout from "src/layouts/layoutMain";
+import LayoutAdmin from "src/layouts/layoutAdmin";
 
 export default function Home() {
   return (
@@ -16,17 +17,17 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="http://localhost:8000/docs">BiblioKeia!</a>
         </h1>
-
-      
       </main>
-
-     
     </div>
-  )
+  );
 }
 
 Home.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+  return (
+    <Layout>
+      <LayoutAdmin>{page}</LayoutAdmin>
+    </Layout> 
+  );
 };
 
 export const getServerSideProps = async (ctx) => {

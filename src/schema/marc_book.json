@@ -1,0 +1,711 @@
+{
+  "datafields": [
+    {
+      "tag": "020",
+      "repeatable": false,
+      "description": "020 - ISBN",
+      "indicators": {
+        "Ind1": false,
+        "Ind2": false
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Número do ISBN"
+        }
+      ]
+    },
+    {
+      "tag": "040",
+      "repeatable": false,
+      "description": "040 - FONTE DA CATALOGAÇÃO",
+      "indicators": {
+        "Ind1": false,
+        "Ind2": false
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Código da Agência Catalogadora",
+          "defaultValue": "BR-MnINPA"
+        },
+        {
+          "value": "b",
+          "label": "b - Idioma da catalogação",
+          "defaultValue": "por"
+        },
+        {
+          "value": "d",
+          "label": "d - Agência que alterou o registro"
+        }
+      ]
+    },
+    {
+      "tag": "082",
+      "repeatable": false,
+      "expanded": true,
+      "description": "082 - CDD",
+      "indicators": {
+        "Ind1": {
+          "defaultValue": "0",
+          "options": [
+            {
+              "value": "0",
+              "label": "0 - Edição completa"
+            },
+            {
+              "value": "1",
+              "label": "1 - Edição abreviada"
+            },
+            {
+              "value": "7",
+              "label": "7 - Outra edição especificada no subcampo $2"
+            }
+          ]
+          
+        },
+        "Ind2": {
+          "defaultValue": "//",
+          "options": [
+            {
+              "value": "//",
+              "label": "# - Informação não fornecida"
+            },
+            {
+              "value": "0",
+              "label": "0 - Atribuído pela LC"
+            },
+            {
+              "value": "4",
+              "label": "4 - Atribuído por outra agência"
+            }
+          ]
+        }
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Número da Classificação"
+        },
+        {
+          "value": "2",
+          "label": "2 - Número da edição"
+        }
+      ]
+    },
+    {
+      "tag": "090",
+      "repeatable": false,
+      "expanded": true,
+      "description": "090 - Chamada",
+      "indicators": {
+        "Ind1": false,
+        "Ind2": false
+      },
+      "subfields": [
+        {
+          "value": "b",
+          "label": "Cutter"
+        }
+      ]
+    },
+    {
+      "tag": "100",
+      "repeatable": false,
+      "expanded": true,
+      "description": "100 - ENTRADA PRINCIPAL - NOME PESSOAL",
+      "indicators": {
+        "Ind1": {
+          "defaultValue": "1",
+          "options": [
+            {
+              "value": "0",
+              "label": "0 - Prenome"
+            },
+            {
+              "value": "1",
+              "label": "1 - Sobrenome"
+            },
+            {
+              "value": "3",
+              "label": "3 - Nome de família"
+            }
+          ]
+        },
+        "Ind2": false
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Nome pessoal"
+        },
+        {
+          "value": "c",
+          "label": "c - Títulos e outras palavras associadas ao nome"
+        }
+      ]
+    },
+    {
+      "tag": "110",
+      "description": "110 - ENTRADA PRINCIPAL - ENTIDADE",
+      "indicators": {
+        "Ind1": {
+          "defaultValue": "0",
+          "options": [
+            {
+              "value": "0",
+              "label": "0 - Nome invertido"
+            },
+            {
+              "value": "1",
+              "label": "1 - Nome da jurisdição"
+            },
+            {
+              "value": "3",
+              "label": "2 - Nome na ordem direta"
+            }
+          ]
+        },
+
+        "Ind2": false
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Nome da entidade ou lugar"
+        },
+        {
+          "value": "b",
+          "label": "b - Unidades subordinadas"
+        }
+      ]
+    },
+    {
+      "tag": "245",
+      "expanded": true,
+      "description": "245 - TÍTULO PRINCIPAL",
+      "indicators": {
+        "Ind1": {
+          "defaultValue": "0",
+          "options": [
+            {
+              "value": "0",
+              "label": "0 - Não gera entrada secundária"
+            },
+            {
+              "value": "1",
+              "label": "1 - Gera entrada secundária"
+            }
+          ]
+        },
+        "Ind2": {
+          "defaultValue": "0",
+          "options": [
+            {
+              "value": "0",
+              "label": "0"
+            },
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4"
+            },
+            {
+              "value": "5",
+              "label": "5"
+            }
+          ]
+        }
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Título principal",
+          "required": true
+        },
+        {
+          "value": "b",
+          "label": "b - Subtítulo"
+        },
+        {
+          "value": "c",
+          "label": "c - Indicação de responsabilidade"
+          
+        }
+      ]
+    },
+    {
+      "tag": "250",
+      "description": "250 - EDIÇÃO",
+      "indicators": {
+        "Ind1": false,
+        "Ind2": false
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Edição"
+        }
+      ]
+    },
+    {
+      "tag": "260",
+      "description": "260 - IMPRENTA",
+      "indicators": {
+        "Ind1": {
+          "defaultValue": "//",
+          "options": [
+            {
+              "value": "//",
+              "label": "# - Não se aplicaa"
+            },
+            {
+              "value": "2",
+              "label": "2 - Editor intermediário"
+            },
+            {
+              "value": "3",
+              "label": "3 - Editor atual"
+            }
+          ]
+        },
+        "Ind2": false
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Lugar de publicação, distribuição, etc."
+        },
+        {
+          "value": "b",
+          "label": "b - Nome do editor, distribuidor, etc."
+        },
+        {
+          "value": "c",
+          "label": "c - Data de publicação, distribuição, etc."
+        }
+      ]
+    },
+    {
+      "tag": "300",
+      "description": "300 - DESCRIÇÃO FÍSICA",
+      "indicators": {
+        "Ind1": false,
+        "Ind2": false
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Extensão"
+        },
+        {
+          "value": "b",
+          "label": "b - Detalhes físicos adicionais"
+        }
+      ]
+    },
+    {
+      "tag": "490",
+      "description": "490 - INDICAÇÃO DE SÉRIE",
+      "indicators": {
+        "Ind1": {
+          "defaultValue": "0",
+          "options": [
+            {
+              "value": "0",
+              "label": "0 - Título não desdobrado"
+            },
+            {
+              "value": "1",
+              "label": "1 - Título desdobrado"
+            }
+          ]
+        },
+        "Ind2": false
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Título da série"
+        },
+        {
+          "value": "v",
+          "label": "v - Número do volume ou designação sequencial da série"
+        }
+      ]
+    },
+    {
+      "tag": "500",
+      "description": "500 - NOTA GERAL",
+      "indicators": {
+        "Ind1": false,
+        "Ind2": false
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Nota geral"
+        }
+      ]
+    },
+    {
+      "tag": "520",
+      "description": "520 - NOTA DE RESUMO",
+      "indicators": {
+        "Ind1": {
+          "defaultValue": "0",
+          "options": [
+            {
+              "value": "#",
+              "label": "# - Resumo"
+            },
+            {
+              "value": "0",
+              "label": "0 - Assunto"
+            },
+            {
+              "value": "1",
+              "label": "1 - Resenha"
+            },
+            {
+              "value": "2",
+              "label": "2 - Abrangência e conteúdo"
+            },
+            {
+              "value": "3",
+              "label": "3 - Resumo analítico"
+            },
+            {
+              "value": "4",
+              "label": "4 - Conteúdo informado"
+            },
+            {
+              "value": "8",
+              "label": "8 - Não gera visualização"
+            }
+          ]
+        },
+        "Ind2": false
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Nota de resumo"
+        }
+      ]
+    },
+    {
+      "tag": "650",
+      "expanded": true,
+      "description": "650 - ASSUNTO TÓPICO",
+      "repeatable": true,
+      "indicators": {
+        "Ind1": {
+          "defaultValue": "0",
+          "options": [
+            {
+              "value": "#",
+              "label": "# - Informação não fornecida"
+            },
+            {
+              "value": "0",
+              "label": "0 - Nível não especificado"
+            },
+            {
+              "value": "1",
+              "label": "1 - Primário"
+            },
+            {
+              "value": "2",
+              "label": "2 - Secundário"
+            }
+          ]
+        },
+        "Ind2": {
+          "defaultValue": "4",
+          "options": [
+            {
+              "value": "0",
+              "label": "0 - Library of Congress Subject Headings"
+            },
+            {
+              "value": "1",
+              "label": "1 - LC subject headings for children's literature"
+            },
+            {
+              "value": "2",
+              "label": "2 - Medical Subject Headings"
+            },
+            {
+              "value": "3",
+              "label": "3 - National Agricultural Library subject authority file"
+            },
+            {
+              "value": "4",
+              "label": "4 - Fonte não especificada"
+            },
+            {
+              "value": "5",
+              "label": "5 - Canadian Subject Headings"
+            },
+            {
+              "value": "6",
+              "label": "6 - Répertoire de vedettes-matière"
+            },
+            {
+              "value": "7",
+              "label": "7 - Fonte especificada no subcampo 2"
+            }
+          ]
+        }
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Cabeçalho tópico"
+        },
+        {
+          "value": "b",
+          "label": "b - Cabeçalho tópico seguindo nome geográfico"
+        },
+        {
+          "value": "v",
+          "label": "v - Subdivisão de forma"
+        },
+        {
+          "value": "x",
+          "label": "x - Subdivisão geral"
+        },
+        {
+          "value": "y",
+          "label": "y - Subdivisão cronológica"
+        },
+        {
+          "value": "z",
+          "label": "z - Subdivisão geográfica"
+        }
+      ]
+    },
+    {
+      "tag": "700",
+      "repeatable": true,
+      "description": "700 - ENTRADA SECUNDÁRIA - NOME PESSOAL",
+      "indicators": {
+        "Ind1": {
+          "defaultValue": "1",
+          "options": [
+            {
+              "value": "0",
+              "label": "0 - Prenome"
+            },
+            {
+              "value": "1",
+              "label": "1 - Sobrenome"
+            },
+            {
+              "value": "3",
+              "label": "3 - Nome de família"
+            }
+          ]
+        },
+        "Ind2": {
+          "defaultValue": "//",
+          "options": [
+            {
+              "value": "//",
+              "label": "# - Informação não fornecida"
+            },
+            {
+              "value": "2",
+              "label": "2 - Entrada analítica"
+            }
+          ]
+        }
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Nome pessoal"
+        },
+        {
+          "value": "e",
+          "label": "e - Termo de relação"
+        }
+      ]
+    },
+    {
+      "tag": "852",
+      "description": "852 - Localização",
+      "indicators": {
+        "Ind1": {
+          "defaultValue": "0",
+          "options": [
+            {
+              "value": "#",
+              "label": "# - Nenhuma informação fornecida"
+            },
+            {
+              "value": "0",
+              "label": "0 - Classificação da LC"
+            },
+            {
+              "value": "1",
+              "label": "1 - CDD"
+            },
+            {
+              "value": "2",
+              "label": "2 - National Library of Medicine Classification"
+            },
+            {
+              "value": "4",
+              "label": "3 - Superintendent of Documents classification"
+            },
+            {
+              "value": "4",
+              "label": "4 - Número de controle na estante"
+            },
+            {
+              "value": "5",
+              "label": "5 - Título"
+            },
+            {
+              "value": "6",
+              "label": "6 - Separado por estante"
+            },
+            {
+              "value": "7",
+              "label": "7 - Fonte especificada no subcampo $2"
+            },
+            {
+              "value": "8",
+              "label": "8 - Outro esquema"
+            }
+          ]
+        },
+        "Ind2": {
+          "defaultValue": "0",
+          "options": [
+            {
+              "value": "#",
+              "label": "# - Nenhuma informação fornecida"
+            },
+            {
+              "value": "0",
+              "label": "0 - Não numerada"
+            },
+            {
+              "value": "1",
+              "label": "1 - Numeração primária"
+            },
+            {
+              "value": "2",
+              "label": "2 - Numeração alternada"
+            }
+          ]
+        }
+      },
+      "subfields": [
+        {
+          "value": "a",
+          "label": "a - Localização",
+          "defaultValue": "Bibloteca do INPA"
+        },
+        {
+          "value": "b",
+          "label": "b - Sub-localização ou coleção"
+        },
+        {
+          "value": "c",
+          "label": "c - Localização na estante"
+        }
+      ]
+    },
+    {
+      "tag": "856",
+      "repeatable": true,
+      "description": "856 - Recurso eletrônico",
+      "indicators": {
+        "Ind1": {
+          "defaultValue": "4",
+          "options": [
+            {
+              "value": "#",
+              "label": "# - Nenhuma informação fornecida"
+            },
+            {
+              "value": "0",
+              "label": "0 - Email"
+            },
+            {
+              "value": "1",
+              "label": "1 - FTP"
+            },
+            {
+              "value": "2",
+              "label": "2 - Acesso remoto - Telnet"
+            },
+            {
+              "value": "3",
+              "label": "3 - Linha de acesso discado - Dial-up"
+            },
+            {
+              "value": "4",
+              "label": "4 - HTTP"
+            },
+            {
+              "value": "7",
+              "label": "7 - Método especificado no subcampo $2"
+            }
+          ]
+        },
+        "Ind2": {
+          "defaultValue": "2",
+          "options": [
+            {
+              "value": "#",
+              "label": "# - Nenhuma informação fornecida"
+            },
+            {
+              "value": "0",
+              "label": "0 - Recurso"
+            },
+            {
+              "value": "1",
+              "label": "1 - Versão do recurso"
+            },
+            {
+              "value": "2",
+              "label": "2 - Recurso relacionado"
+            },
+            {
+              "value": "8",
+              "label": "8 - Não gera visualização"
+            }
+          ]
+        }
+      },
+      "subfields": [
+        {
+          "value": "u",
+          "label": "u - Identificador uniforme de recurso - URI"
+        },
+        {
+          "value": "3",
+          "label": "3 Material especificado",
+          "defaultValue": "capa"
+        }
+      ]
+    }
+  ]
+}

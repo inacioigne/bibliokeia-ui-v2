@@ -1,9 +1,6 @@
 import '../styles/globals.css'
-import Layout from "src/admin/layout"
+import Layout from "src/layouts/layoutMain"
 import {AuthProvider } from "src/auth/authContext"
-
-
-
 
 
 function MyApp({ Component, pageProps }) {
@@ -11,7 +8,10 @@ function MyApp({ Component, pageProps }) {
 
   return getLayout(
     <AuthProvider>
-      <Component {...pageProps} />
+
+    <Component {...pageProps} />
+   
+     
 
     </AuthProvider>
 
