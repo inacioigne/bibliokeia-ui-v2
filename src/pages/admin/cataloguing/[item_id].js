@@ -10,7 +10,7 @@ export default function Item() {
   return (
     <ItemProvider>
       <ItemCard /> 
-    </ItemProvider>
+    </ItemProvider> 
   );
 }
 

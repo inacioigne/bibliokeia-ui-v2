@@ -1,5 +1,5 @@
 import {
-  Container,
+  //Container,
   Card,
   CardHeader,
   Avatar,
@@ -16,12 +16,12 @@ import {
   DialogTitle,
   Stack,
   Snackbar,
-  ButtonGroup,
-  Popper,
-  Grow,
-  Paper,
-  ClickAwayListener,
-  MenuList,
+  //ButtonGroup,
+  //Popper,
+  //Grow,
+  //Paper,
+  //ClickAwayListener,
+  //MenuList,
 } from "@mui/material";
 import React from "react";
 import { red } from "@mui/material/colors";
@@ -79,6 +79,7 @@ export default function ItemCard() {
   const router = useRouter();
   const { item_id, item, openModal, setOpenModal, openSnack, setOpenSnack } =
     useContext(ItemContext);
+    console.log('DS: ', item)
 
   const [anchor, setAnchor] = useState(null);
   const [value, setValue] = useState(0);
@@ -256,10 +257,7 @@ export default function ItemCard() {
       </Card>
       {/** SNACKBAR */}
       <Stack spacing={2} sx={{ width: "100%" }}>
-        {/**
-      <Button variant="outlined" onClick={handleClickSnack}>
-      Open success snackbar
-      </Button>*/}
+
         <Snackbar
           open={openSnack}
           autoHideDuration={6000}

@@ -12,7 +12,10 @@ import { Controller } from "react-hook-form";
 import { Add, Remove } from "@mui/icons-material";
 import Indicators from "src/admin/components/cataloguing/marc/indicators"
 
+
+
 export default function Datafield(props) {
+  
   let tag = props.metadata?.tag;
   if (props.metadata.repeatable) {
     return (
@@ -110,6 +113,7 @@ export default function Datafield(props) {
       </Box>
     );
   } else {
+
     return (
       <Accordion defaultExpanded={props.metadata.expanded}>
         <AccordionSummary
@@ -159,10 +163,12 @@ export default function Datafield(props) {
               style={{ width: "100%" }}
             >
               {props.metadata.subfields.map((subfield, index) => (
+                
+              
                 <Controller
                   key={index}
                   name={`datafields[${props.metadata.tag}].subfields.${subfield.value}`}
-                  control={props.control}
+                  control={props.control}                  
                   defaultValue={
                     subfield.defaultValue ? subfield.defaultValue : ""
                   }
@@ -177,6 +183,7 @@ export default function Datafield(props) {
                     />
                   )}
                 />
+                
               ))}
             </Box>
           </Box>
