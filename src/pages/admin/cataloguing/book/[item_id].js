@@ -4,12 +4,17 @@ import { theme } from "src/theme";
 import { DashboardLayout } from "src/layouts/dashboard-layout";
 import { ItemProvider } from 'src/admin/contexts/itemContext'
 import { parseCookies } from "nookies";
-import ItemEdit from "./itemEdit"
+//import ItemEdit from "./itemEdit"
+import FormEdit from "./formEdit"
+
 
 export default function Item() {
+  
     return (
         <ItemProvider>
-        <ItemEdit />
+        {/* <ItemEdit /> */}
+        <FormEdit />
+
          
 
         </ItemProvider>

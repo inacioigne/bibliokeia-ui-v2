@@ -13,7 +13,6 @@ import { Add, Remove } from "@mui/icons-material";
 import Indicators from "src/admin/components/cataloguing/marc/indicators"
 
 
-
 export default function Datafield(props) {
   
   let tag = props.metadata?.tag;
@@ -28,7 +27,7 @@ export default function Datafield(props) {
             }}
           >
             <Box style={{ flexGrow: 1 }}>
-              <Accordion>
+              <Accordion >
                 <AccordionSummary
                   expandIcon={<ExpandMore />}
                   aria-controls="content"

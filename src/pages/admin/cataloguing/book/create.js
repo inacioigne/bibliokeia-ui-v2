@@ -268,7 +268,7 @@ export default function CreateBook() {
               value == 5 ? { display: "grid", rowGap: 3 } : { display: "none" }
             }
           >
-            {tags5.map((field, index) => (
+            {tags5.map((field, index) => ( 
               <Datafield key={index} control={control} metadata={field} />
             ))}
           </Box>
