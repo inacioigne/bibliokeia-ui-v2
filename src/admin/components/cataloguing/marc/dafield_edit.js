@@ -70,7 +70,7 @@ export default function DatafieldEdit(props) {
                     subfield={subfield}
                     values={props.values?.subfields[props.subfield?.value]}
                     />
-                ))}
+                ))} 
             </Box>
 
         </Box>

@@ -14,20 +14,24 @@ import {
 export default function Subfield(props) {
 
     const { item_id, item } = useContext(ItemContext);
-    console.log('SB: ', item?.datafields[props.metadata.tag].subfields[props.subfield.value])
-     const  v = async () => {
-        return 'x'
-    }
+    //console.log('SB: ', item?.datafields[props.metadata.tag].subfields[props.subfield.value])
+    // console.log('SB: ', item?.datafields[props.metadata.tag].subfields[props.subfield.value])
+    //  const  v = async () => {
+    //     return 'x'
+    // }
 
 
     
   return (
+    <>
+    <p>{item?.datafields[props.metadata.tag].subfields[props.subfield.value]}</p>
 
+  
     <Controller
       key={props.index}
       name={`datafields[${props.metadata.tag}].subfields.${props.subfield.value}`}
       control={props.control}
-      defaultValue={ v }
+      defaultValue=""
       rules={{ required: props.subfield.required ? true : false }}
       render={({ field }) => (
         <TextField
@@ -39,5 +43,6 @@ export default function Subfield(props) {
         />
       )}
     />  
+      </>
   ) 
 }

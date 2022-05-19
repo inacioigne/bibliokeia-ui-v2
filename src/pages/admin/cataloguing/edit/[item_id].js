@@ -8,11 +8,16 @@ import Layout from "src/layouts/layoutMain";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "src/theme";
 import ItemEdit from "src/admin/components/cataloguing/edit/item_edit"
+import { api } from "src/services/api";
+import { ItemContext } from "src/admin/contexts/itemContext"
 
 
 
 
 export default function Edit() { 
+  
+
+
 
   return (
     <ItemProvider>

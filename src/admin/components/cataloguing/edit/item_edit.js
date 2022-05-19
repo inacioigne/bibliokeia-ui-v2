@@ -53,33 +53,35 @@ function a11yProps(index) {
 
 
 export default function ItemEdit() { 
-    
-    const { item_id, item } = useContext(ItemContext);
-    
-    const [value, setValue] = useState(0);
-  
+  const { item_id, item } = useContext(ItemContext);
+
+    const [value, setValueTabs] = useState(0);
+    //const { handleSubmit, control, setValue} = useForm();
+   
     const {
       control,
       register,
       handleSubmit,
+    setValue,
       formState: { errors },
-    } = useForm({
-      defaultValues: {
-        datafields: {
-          650: [{}],
-          700: [{}],
-          856: [{}],
-        },
-      },
+    } = useForm( {
+      defaultValues: {datafields: {'020': {subfields: {a: 'ISBN'}}}}
+     
     });
 
-    const onSubmit = (data) => {pass}
-    return (
+
+      if (item) {
+          setValue("datafields['020'].subfields.a", 'porra');
+      }
+
+
+      const onSubmit = (data) => {pass}
+      return (
         <Box sx={{ p: 2}}>
       <Tabs
           value={value}
           onChange={(event, newValue) => {
-            setValue(newValue);
+            setValueTabs(newValue);
           }}
           variant="fullWidth"
         >
@@ -94,6 +96,7 @@ export default function ItemEdit() {
           <Tab label="Tags 8XX" {...a11yProps(8)} sx={{ borderRight: 1 }} />
         
         </Tabs>
+        
         <form onSubmit={handleSubmit(onSubmit)}>
         <Box
             sx={
@@ -108,7 +111,7 @@ export default function ItemEdit() {
                 key={index}
                 metadata={field}
                 control={control}
-                values={item?.datafields[field.tag]}
+                //values={item?.datafields[field.tag]}
                  />
             //   <Datafield
             //     key={index}
@@ -124,5 +127,9 @@ export default function ItemEdit() {
      
 
       </Box>
-    )
+      )
+
+    
+
+    
 }
