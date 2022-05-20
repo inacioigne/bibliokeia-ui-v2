@@ -1,35 +1,22 @@
-import { parseCookies } from "nookies";
-import { Container, Box, Tabs, Tab } from "@mui/material";
-import { useState, useEffect, useContext } from "react";
-//import MetadataEdit from "src/components/cataloguing/metadataEdit"
-import { ItemProvider } from 'src/admin/contexts/itemContext'
-import { DashboardLayout } from "src/layouts/dashboard-layout";
 import Layout from "src/layouts/layoutMain";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "src/theme";
-import ItemEdit from "src/admin/components/cataloguing/edit/item_edit"
-import { api } from "src/services/api";
-import { ItemContext } from "src/admin/contexts/itemContext"
+import { DashboardLayout } from "src/layouts/dashboard-layout";
+import { ItemProvider } from 'src/admin/contexts/itemContext'
+import { parseCookies } from "nookies";
+import FormEdit from "src/admin/components/cataloguing/edit/form_edit"
 
 
-
-
-export default function Edit() { 
-  
-
-
-
+export default function Item() {
   return (
     <ItemProvider>
-      <ItemEdit />
-
+      <FormEdit />
     </ItemProvider>
   );
 }
 
 
-
-ItemEdit.getLayout = function getLayout(page) {
+Item.getLayout = function getLayout(page) {
   return (
     <Layout>
       <ThemeProvider theme={theme}>
@@ -49,7 +36,6 @@ export const getServerSideProps = async (ctx) => {
       },
     };
   }
-
   return {
     props: {},
   };
