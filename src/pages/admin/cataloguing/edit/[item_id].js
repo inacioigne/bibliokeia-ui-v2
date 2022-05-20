@@ -10,7 +10,7 @@ import FormEdit from "src/admin/components/cataloguing/edit/form_edit"
 export default function Item() {
   return (
     <ItemProvider>
-      <FormEdit />
+      <FormEdit /> 
     </ItemProvider>
   );
 }

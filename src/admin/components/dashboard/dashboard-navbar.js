@@ -7,14 +7,17 @@ import {
   IconButton,
   Toolbar,
   Tooltip,
+  
 } from "@mui/material";
-import { Menu, Search } from "@mui/icons-material";
+import { Menu, Search  } from "@mui/icons-material";
 import { Users as UsersIcon } from "src/admin/components/icons/users";
 import { Bell as BellIcon } from "src/admin/components/icons/bell";
 import { UserCircle as UserCircleIcon } from "src/admin/components/icons/user-circle";
 import PropTypes from "prop-types";
 import { useContext } from 'react';
 import { AuthContext } from 'src/auth/authContext'
+
+
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -25,7 +28,7 @@ export const DashboardNavbar = (props) => {
   const { onSidebarOpen, ...other } = props;
 
   const { user } = useContext(AuthContext);
-  //console.log('USER: ', user)
+
 
   return (
     <>
@@ -47,6 +50,7 @@ export const DashboardNavbar = (props) => {
             left: 0,
             px: 2,
           }}
+         
         >
           <IconButton
             onClick={onSidebarOpen}
@@ -90,6 +94,7 @@ export const DashboardNavbar = (props) => {
           </Avatar>
         </Toolbar>
       </DashboardNavbarRoot>
+      
     </>
   );
 };

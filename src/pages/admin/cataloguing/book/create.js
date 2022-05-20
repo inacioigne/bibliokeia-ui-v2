@@ -4,14 +4,15 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "src/theme";
 import schema from "src/schema/marc_book.json";
 import {
-  Container,
   Tabs,
   Tab,
-  Box,  
+  Box,
   Button,
   Snackbar,
   IconButton,
   Alert,
+  Zoom,
+  Fab,
 } from "@mui/material";
 import { useState } from "react";
 import { api } from "src/services/api";
@@ -19,10 +20,60 @@ import Leader from "src/admin/components/cataloguing/marc/leader";
 import Tag008 from "src/admin/components/cataloguing/marc/tag008";
 import { useForm, useFieldArray } from "react-hook-form";
 import Datafield from "src/admin/components/cataloguing/marc/datafield";
-import CloseIcon from "@mui/icons-material/Close";
-import Time from "src/lib/time"
+import { Close, KeyboardArrowUp } from "@mui/icons-material";
+import Time from "src/lib/time";
 import { parseCookies } from "nookies";
 import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+import { AuthContext } from "src/auth/authContext";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import LoadingButton from "@mui/lab/LoadingButton";
+
+function ScrollTop(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 20,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      "#back-to-top-anchor"
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <Box
+        onClick={handleClick}
+        role="presentation"
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
+      >
+        {children}
+      </Box>
+    </Zoom>
+  );
+}
+
+ScrollTop.propTypes = {
+  children: PropTypes.element.isRequired,
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
 
 function a11yProps(index) {
   return {
@@ -61,10 +112,10 @@ const [tag856] = schema.datafields.filter((field) => {
   return field.tag == "856";
 });
 
-export default function CreateBook() {
-
+export default function CreateBook(props) {
   const router = useRouter();
   const [value, setValue] = useState(0);
+  const [loading, setLoading] = useState(false);
   //SNACKBAR
   const [snack, setSnack] = useState(false);
   const [snackSuccess, setsnackSuccess] = useState(false);
@@ -84,7 +135,7 @@ export default function CreateBook() {
         color="inherit"
         onClick={handleClose}
       >
-        <CloseIcon fontSize="small" />
+        <Close fontSize="small" />
       </IconButton>
     </>
   );
@@ -122,6 +173,7 @@ export default function CreateBook() {
   } = useFieldArray({ control, name: "datafields[856]" });
 
   const onSubmit = (data) => {
+    setLoading(!loading);
     const leader = Object.values(data.leader);
     const tag008 = Object.values(data.tag008);
 
@@ -181,13 +233,15 @@ export default function CreateBook() {
   };
 
   return (
-      <Box sx={{ p: 2}}>
+    <>
+      <Box sx={{ p: 2 }}>
         <Tabs
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
           variant="fullWidth"
+          id="back-to-top-anchor"
         >
           <Tab label="Tags 0XX" {...a11yProps(0)} sx={{ borderRight: 1 }} />
           <Tab label="Tags 1XX" {...a11yProps(1)} sx={{ borderRight: 1 }} />
@@ -268,7 +322,7 @@ export default function CreateBook() {
               value == 5 ? { display: "grid", rowGap: 3 } : { display: "none" }
             }
           >
-            {tags5.map((field, index) => ( 
+            {tags5.map((field, index) => (
               <Datafield key={index} control={control} metadata={field} />
             ))}
           </Box>
@@ -311,17 +365,14 @@ export default function CreateBook() {
               remove={Remove856}
             />
           </Box>
-
-          <Button
-            variant="outlined"
+          <LoadingButton
             sx={{ m: 2 }}
-            type="submit"
-            onClick={() => {
-              setSnack(true);
-            }}
+            onClick={handleSubmit(onSubmit)}
+            loading={loading}
+            variant="outlined"
           >
             Salvar
-          </Button>
+          </LoadingButton>
         </form>
         {errors.datafields && (
           <Snackbar
@@ -340,9 +391,17 @@ export default function CreateBook() {
           autoHideDuration={6000}
           onClose={handleClose}
         >
-          <Alert action={action} severity="success">Item registrado com sucesso!</Alert>
+          <Alert action={action} severity="success">
+            Item registrado com sucesso!
+          </Alert>
         </Snackbar>
       </Box>
+      <ScrollTop {...props}>
+        <Fab color="secondary" size="small" aria-label="scroll back to top">
+          <KeyboardArrowUp />
+        </Fab>
+      </ScrollTop>
+    </>
   );
 }
 

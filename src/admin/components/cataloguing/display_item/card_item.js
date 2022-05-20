@@ -79,7 +79,6 @@ export default function ItemCard() {
   const router = useRouter();
   const { item_id, item, openModal, setOpenModal, openSnack, setOpenSnack } =
     useContext(ItemContext);
-    console.log('DS: ', item)
 
   const [anchor, setAnchor] = useState(null);
   const [value, setValue] = useState(0);

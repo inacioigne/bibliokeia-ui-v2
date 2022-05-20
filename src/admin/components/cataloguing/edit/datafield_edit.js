@@ -57,16 +57,16 @@ import {
                         <Box sx={{ display: "flex", gap: 2 }}>
                           <Indicators
                             metadata={metadata.indicators.Ind1}
-                            control={control}
+                            control={control} 
                             label="Ind1"
-                            name={`datafields[${metadata.tag}].indicators.Ind1`}
+                            name={`datafields[${metadata.tag}][${index}].indicators.Ind1`}
                           />
   
                           <Indicators
                             metadata={metadata.indicators.Ind2}
                             control={control}
                             label="Ind2"
-                            name={`datafields[${metadata.tag}].indicators.Ind2`}
+                            name={`datafields[${metadata.tag}][${index}].indicators.Ind2`}
                           />
                         </Box>
                       </Box>

@@ -2,9 +2,10 @@ import { DashboardLayout } from "src/layouts/dashboard-layout";
 import Layout from "src/layouts/layoutMain";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "src/theme";
+//import theme from "src/theme/custom_theme"
 import Head from "next/head";
 import { Box, Container, Grid } from "@mui/material";
-import { Book } from "src/admin/components/cataloguing/book/book"
+import { Book } from "src/admin/components/cataloguing/book/book";
 import { parseCookies } from "nookies";
 
 export default function Dashboard() {
@@ -18,24 +19,15 @@ export default function Dashboard() {
         sx={{
           flexGrow: 1,
           py: 8,
-          backgroundColor: theme.palette.background.default
+          backgroundColor: theme.palette.background.default,
         }}
       >
         <Container maxWidth={false}>
           <Grid container spacing={3}>
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
-          <Book />
-
+            <Grid item lg={3} sm={6} xl={3} xs={12}>
+              <Book />
+            </Grid>
           </Grid>
-          
-          </Grid>
-          
         </Container>
       </Box>
     </>

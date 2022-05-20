@@ -19,9 +19,9 @@ export const theme = createTheme({
         root: {
           textTransform: 'none'
         },
-        sizeSmall: {
-          padding: '6px 16px'
-        },
+        // sizeSmall: {
+        //   padding: '6px 16px'
+        // },
         sizeMedium: {
           padding: '8px 20px'
         },
@@ -132,6 +132,7 @@ export const theme = createTheme({
     }
   },
   palette: {
+    //mode: 'dark',
     neutral: {
       100: '#F3F4F6',
       200: '#E5E7EB',
@@ -297,3 +298,4 @@ export const theme = createTheme({
     }
   }
 });
+
