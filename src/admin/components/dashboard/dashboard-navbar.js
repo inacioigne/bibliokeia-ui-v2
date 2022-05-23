@@ -7,17 +7,17 @@ import {
   IconButton,
   Toolbar,
   Tooltip,
-  
+  Switch, 
+  FormControlLabel
 } from "@mui/material";
-import { Menu, Search  } from "@mui/icons-material";
+import { Menu, Search } from "@mui/icons-material";
 import { Users as UsersIcon } from "src/admin/components/icons/users";
 import { Bell as BellIcon } from "src/admin/components/icons/bell";
 import { UserCircle as UserCircleIcon } from "src/admin/components/icons/user-circle";
 import PropTypes from "prop-types";
-import { useContext } from 'react';
-import { AuthContext } from 'src/auth/authContext'
-
-
+import { useContext } from "react";
+import { AuthContext } from "src/auth/authContext";
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -27,8 +27,11 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 export const DashboardNavbar = (props) => {
   const { onSidebarOpen, ...other } = props;
 
-  const { user } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
 
+  async function handleSignOut(ctx) {
+    await signOut(ctx);
+  }
 
   return (
     <>
@@ -50,7 +53,6 @@ export const DashboardNavbar = (props) => {
             left: 0,
             px: 2,
           }}
-         
         >
           <IconButton
             onClick={onSidebarOpen}
@@ -69,8 +71,8 @@ export const DashboardNavbar = (props) => {
             </IconButton>
           </Tooltip>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ color: '#121828'}}><p>{user?.sub}</p></Box>
-          <Tooltip title="Contacts">
+          
+          {/* <Tooltip title="Contacts">
             <IconButton sx={{ ml: 1 }}>
               <UsersIcon fontSize="small" />
             </IconButton>
@@ -81,8 +83,16 @@ export const DashboardNavbar = (props) => {
                 <BellIcon fontSize="small" />
               </Badge>
             </IconButton>
+          </Tooltip> */}
+          <FormControlLabel 
+          onClick={handleSignOut}
+          sx={{ color: "#121828" }} control={<Switch defaultChecked />} label="Sair" />
+          <Tooltip title={user?.sub ? user.sub : 'no user'}>
+          <Avatar sx={{ bgcolor: deepPurple[500] }}>{user?.sub.substring(0,1).toUpperCase()}</Avatar>
+
           </Tooltip>
-          <Avatar
+          
+          {/* <Avatar
             sx={{
               height: 40,
               width: 40,
@@ -91,10 +101,9 @@ export const DashboardNavbar = (props) => {
             src="/img/user.jfif"
           >
             <UserCircleIcon fontSize="small" />
-          </Avatar>
+          </Avatar> */}
         </Toolbar>
       </DashboardNavbarRoot>
-      
     </>
   );
 };

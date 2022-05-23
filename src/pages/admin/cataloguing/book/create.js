@@ -7,7 +7,7 @@ import {
   Tabs,
   Tab,
   Box,
-  Button,
+  //Button,
   Snackbar,
   IconButton,
   Alert,
@@ -25,9 +25,10 @@ import Time from "src/lib/time";
 import { parseCookies } from "nookies";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
-import { AuthContext } from "src/auth/authContext";
+//import { AuthContext } from "src/auth/authContext";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import LoadingButton from "@mui/lab/LoadingButton";
+import Snack from "src/admin/components/alert/snackbar";
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -117,7 +118,8 @@ export default function CreateBook(props) {
   const [value, setValue] = useState(0);
   const [loading, setLoading] = useState(false);
   //SNACKBAR
-  const [snack, setSnack] = useState(false);
+  const [snack, setSnack] = useState(true);
+
   const [snackSuccess, setsnackSuccess] = useState(false);
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -375,18 +377,20 @@ export default function CreateBook(props) {
           </LoadingButton>
         </form>
         {errors.datafields && (
-          <Snackbar
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            open={snack}
-            autoHideDuration={6000}
-            onClose={handleClose}
-          >
-            <Alert action={action} severity="warning">{`Campo ${Object.keys(
-              errors?.datafields
-            )} é obrigatório!`}</Alert>
-          </Snackbar>
+          <Snack
+            open={true}
+            duration={null}
+            msg={`Campo ${Object.keys(errors?.datafields)} é obrigatório!`}
+            severity={"warning"}
+          />
         )}
-        <Snackbar
+        <Snack
+            open={snackSuccess}
+            duration={6000}
+            msg={'Item registrado com sucesso!'}
+            severity={"success"}
+          />
+        {/* <Snackbar
           open={snackSuccess}
           autoHideDuration={6000}
           onClose={handleClose}
@@ -394,7 +398,7 @@ export default function CreateBook(props) {
           <Alert action={action} severity="success">
             Item registrado com sucesso!
           </Alert>
-        </Snackbar>
+        </Snackbar> */}
       </Box>
       <ScrollTop {...props}>
         <Fab color="secondary" size="small" aria-label="scroll back to top">

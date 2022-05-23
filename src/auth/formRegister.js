@@ -32,7 +32,7 @@ export default function FormRegister({ display, setVisible, alert }) {
     setLoading(!loading);
 
     api
-      .post("usuarios", data)
+      .post("user/register", data)
       .then((res) => {
         if (res.status === 201) {
           setLoading(false);

@@ -16,8 +16,6 @@ export function AuthProvider({ children }) {
     if (token) {
       //Pegar informações do usuario
       const payload = token.split(".")[1];
-      //console.log('DATA: ', payload)
-      //console.log('TK: ', JSON.parse(window.atob(payload)))
       setUser(JSON.parse(window.atob(payload)));
       api.defaults.headers["Authorization"] = `Bearer ${token}`;
     }
