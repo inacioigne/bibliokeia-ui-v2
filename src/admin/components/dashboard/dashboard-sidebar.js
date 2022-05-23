@@ -15,6 +15,7 @@ import { NavItem } from "src/admin/components/dashboard/nav-item";
 import { Users as UsersIcon } from "src/admin/components/icons/users";
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 const items = [
   {
@@ -23,9 +24,9 @@ const items = [
     title: "Dashboard",
   },
   {
-    href: '/customers',
-    icon: (<UsersIcon fontSize="small" />),
-    title: 'Customers'
+    href: '/admin/acervo',
+    icon: (<LibraryBooksIcon fontSize="small" />),
+    title: 'Acervo'
   }
 ];
 

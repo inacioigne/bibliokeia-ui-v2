@@ -1,9 +1,9 @@
-import Navbar from "src/admin/components/navbar"
+//import Navbar from "src/admin/components/navbar"
 
 export default function Layout({ children }) {
     return (
         <>
-        <Navbar />
+    {/* <Navbar /> */}
         <main>{children}</main>
 
         </>

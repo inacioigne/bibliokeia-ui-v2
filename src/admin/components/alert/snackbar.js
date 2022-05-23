@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Close } from "@mui/icons-material";
 
 export default function Snack({ open, duration, msg, severity }) {
-    console.log('S: ', open)
+    //console.log('S: ', open)
     
     
   const [snack, setSnack] = useState(open);

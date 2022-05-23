@@ -82,7 +82,7 @@ export default function FormLogin({ display, setVisible, alert}) {
               name="username"
               rules={{ required: true }}
               render={({ field }) => (
-                <TextField {...field} label="Usuário" variant="standard" />
+                <TextField {...field} label="Email" variant="standard" />
               )}
             />
             {errors.username?.type === "required" &&
