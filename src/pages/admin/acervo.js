@@ -2,72 +2,86 @@ import Layout from "src/layouts/layoutMain";
 import { ThemeProvider } from "@mui/material/styles";
 import { DashboardLayout } from "src/layouts/dashboard-layout";
 import { theme } from "src/theme";
-import { Box, Container, InputBase, IconButton, Card, CardContent, Typography, Button} from "@mui/material/";
+import {
+  Box,
+  Container,
+  InputBase,
+  IconButton,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+} from "@mui/material/";
 import SearchIcon from "@mui/icons-material/Search";
-import Image from "next/image";
 
-export default function Acervo() {
+import { api } from "src/services/api"
+import CardList from "src/admin/components/cataloguing/display_item/card_list_item"
+
+export default function Acervo({ data }) {
+
   return (
     <Container>
-      <Box sx={{display: "flex", justifyContent: 'center'}}>
-      <Box sx={{ display: "flex", mt: 3, border: 1, borderRadius: 5, width: "300px" }}>
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Busca"
-          inputProps={{ "aria-label": "busca" }}
-        />
-        <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-          <SearchIcon />
-        </IconButton>
+      <Box sx={{ display: "flex", justifyContent: "center", pb: 5 }}>
+        <Box
+          sx={{
+            display: "flex",
+            mt: 3,
+            border: 1,
+            borderRadius: 5,
+            width: "300px",
+          }}
+        >
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="Busca"
+            inputProps={{ "aria-label": "busca" }}
+          />
+          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+        </Box>
       </Box>
-
-      </Box>
-      <Box>
-          <Card sx={{ display: 'flex' }}>
-          {/* <CardMedia
-        component="img"
-        sx={{ width: 151 }}
-        image="/static/images/cards/live-from-space.jpg"
-        alt="Live from space album cover"
-      /> */}
-      <Image
-          src={"https://images-na.ssl-images-amazon.com/images/I/61ukqo09V1L._SY344_BO1,204,203,200_QL70_ML2_.jpg"}
-          width={155}
-          height={200} 
-        />
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <CardContent sx={{ flex: '1 0 auto'}}>
-          <Typography component="div" variant="h5">
-            Histórias assustadoras para contar à noite / Edgar Allan Poe
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            Publicação: São Paulo: Companhia das Letras, 2020.
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            Assunto: Terror; Horror
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            Número de chamda: 856.7 P589h
-          </Typography>
-          <Box sx={{ '& button': { mt: 2, ml: 1 } }}>
-          <Button size="small" variant="outlined">Detalhes</Button>
-          <Button size="small" variant="outlined">Emprestar</Button>
-
+      <Box sx={{ mb: 5 }}>
+        { data.items.map((item, index) => (
+          <Box key={index} sx={{ mb: 2}} >
+            <CardList 
+            title={item.marc.datafields['245'].subfields.a}
+            author={item.marc.datafields['245'].subfields.c}
+            local={item.marc.datafields['260'].subfields.a}
+            publisher={item.marc.datafields['260'].subfields.b}
+            year={item.marc.datafields['260'].subfields.c}
+            subjects={item.marc.datafields['650']}
+            cdd={item.marc.datafields['082'].subfields.a}
+            cutter={item.marc.datafields['090'].subfields.b}
+            resources={item.marc.datafields['856']}
+            itemId={item.id}
+            />
+            
           </Box>
           
-          
 
-          </CardContent>
-          
-          </Box>
-              
-
-          </Card>
+        ))}
+        
+        
       </Box>
-
-      
     </Container>
   );
+}
+
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts
+  const res = await api.get('acervo/item/items')
+  const data = await res.data
+  
+
+
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      data,
+    },
+  }
 }
 
 Acervo.getLayout = function getLayout(page) {

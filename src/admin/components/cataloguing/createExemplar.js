@@ -1,15 +1,12 @@
 import React from "react";
-import ReactDOM from "react-dom";
+//import ReactDOM from "react-dom";
 import DialogContent from "@mui/material/DialogContent";
 import Box from "@mui/material/Box";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import {
   TextField,
-  Stack,
-  Button,
-  Snackbar, 
-  MuiAlert,
-  IconButton,
+  Skeleton,
+   Button
 } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import { Add, Close } from "@mui/icons-material";
@@ -27,11 +24,11 @@ export default function CreateExemplar(props) {
     item_id,
     item,
     rowsEx,
-    setRowsEx,
+    //setRowsEx,
     getExemplar,
-    openModal,
+   //openModal,
     setOpenModal,
-    openSnack,
+    //openSnack,
     setOpenSnack,
 
   } = useContext(ItemContext);
@@ -42,7 +39,7 @@ export default function CreateExemplar(props) {
 
   const getNextEx = async () => {
 
-    api.get(`cataloging/exemplar/last_exemplar/`)
+    api.get(`cataloging/exemplar/next_exemplar/`)
     .then(res => {
       
       setnextEx(res.data)
@@ -71,8 +68,6 @@ export default function CreateExemplar(props) {
           collection: "Obras Gerais",
           volume: "",
           ex: `ex. ${rowsEx.length + 1}`,
-          //number: nextEx ? nextEx.exemplar : 'NO',
-          //number: nextEx?.exemplar,
           status: "disponivel",
         },
       ],
@@ -129,7 +124,7 @@ export default function CreateExemplar(props) {
   };
 
   if (!nextEx) {
-    return null
+    return <Skeleton animation="wave" />
   }
  
 

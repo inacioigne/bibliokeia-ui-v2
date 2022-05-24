@@ -104,7 +104,7 @@ export default function ItemCard() {
   };
 
   const handleClickOpen = () => {
-    //getData();
+    
     setOpenModal(true);
   };
 
@@ -250,7 +250,7 @@ export default function ItemCard() {
           >
             Adicionar Exemplar
           </BootstrapDialogTitle>
-          {/*CreateExemplar */}
+       
           <CreateExemplar />
         </BootstrapDialog>
       </Card>

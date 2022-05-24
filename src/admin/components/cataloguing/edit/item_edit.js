@@ -319,14 +319,14 @@ export default function ItemEdit({ item, id }) {
           variant="outlined"
           sx={{ m: 2 }}
           type="submit"
-          onClick={() => {
-            console.log(errors.datafields);
-          }}
+          // onClick={() => {
+          //   console.log(errors.datafields);
+          // }}
         >
           Salvar
         </Button>
       </form>
-      {errors.datafields && <h1>ERROOUUU</h1>}
+      {/* {errors.datafields && <h1>ERROOUUU</h1>} */}
       <Snackbar
           open={snack}
           autoHideDuration={6000}
