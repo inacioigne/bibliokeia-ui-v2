@@ -387,15 +387,7 @@ export default function CreateBook(props) {
             msg={'Item registrado com sucesso!'}
             severity={"success"}
           />
-        {/* <Snackbar
-          open={snackSuccess}
-          autoHideDuration={6000}
-          onClose={handleClose}
-        >
-          <Alert action={action} severity="success">
-            Item registrado com sucesso!
-          </Alert>
-        </Snackbar> */}
+
       </Box>
       <ScrollTop {...props}>
         <Fab color="secondary" size="small" aria-label="scroll back to top">

@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
     setUser(JSON.parse(window.atob(payload)));
     
     
-    Router.push("/admin/dashboard");
+    Router.push("/admin/cataloguing/painel");
    
   }
 
