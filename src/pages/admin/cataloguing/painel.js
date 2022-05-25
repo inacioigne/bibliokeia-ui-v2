@@ -2,17 +2,16 @@ import { DashboardLayout } from "src/layouts/dashboard-layout";
 import Layout from "src/layouts/layoutMain";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "src/theme";
-//import theme from "src/theme/custom_theme"
 import Head from "next/head";
 import { Box, Container, Grid } from "@mui/material";
 import { Book } from "src/admin/components/cataloguing/book/book";
 import { parseCookies } from "nookies";
 
-export default function Dashboard() {
+export default function Cataloguing() {
   return (
     <>
       <Head>
-        <title> BiblioKeia | Dashboard</title>
+        <title> BiblioKeia | Catalogação </title>
       </Head>
       <Box
         component="main"
@@ -34,7 +33,7 @@ export default function Dashboard() {
   );
 }
 
-Dashboard.getLayout = function getLayout(page) {
+Cataloguing.getLayout = function getLayout(page) {
   return (
     <Layout>
       <ThemeProvider theme={theme}>

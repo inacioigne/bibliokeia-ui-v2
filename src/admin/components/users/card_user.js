@@ -7,33 +7,33 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import NextLink from "next/link";
 
-
-export const Book = (props) => (
-  <Card sx={{ height: "100%" }} {...props}>
+export const CardUser = (props) => (
+  <Card sx={{ height: "100%" }}>
     <CardContent>
       <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
         <Grid item>
           <Typography color="textSecondary" gutterBottom variant="overline">
-            Livros
+            Usuários
           </Typography>
           <Typography color="textPrimary" variant="h4">
-            256
+            56
           </Typography>
+          
         </Grid>
         <Grid item>
-          <Avatar
-            sx={{
-              backgroundColor: "error.main",
-              height: 56,
-              width: 56,
-            }}
-          >
-            <MenuBookOutlinedIcon />
-          </Avatar>
-        </Grid>
+            <Avatar
+              sx={{
+                backgroundColor: "error.main",
+                height: 56,
+                width: 56,
+              }}
+            >
+              <AccountCircleIcon />
+            </Avatar>
+          </Grid>
       </Grid>
       <Box
         sx={{
@@ -43,9 +43,9 @@ export const Book = (props) => (
           justifyContent: "center",
         }}
       >
-        <NextLink href="/admin/cataloguing/book/create" passHref>
+        <NextLink href="/admin/users/register" passHref>
           <Button variant="outlined" size="small">
-            Novo
+            Cadastrar
           </Button>
           
         </NextLink>

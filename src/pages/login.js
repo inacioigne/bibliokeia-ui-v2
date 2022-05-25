@@ -7,7 +7,7 @@ import FormRegister from "src/auth/formRegister";
 
 export default function Login() {
   const [visible, setVisible] = useState(0);
-  const { open, setOpen} = useContext(AuthContext);
+  //const { open, setOpen} = useContext(AuthContext);
   const [openSnack, setSnack] = useState({
     visible: false, 
     msg: null,

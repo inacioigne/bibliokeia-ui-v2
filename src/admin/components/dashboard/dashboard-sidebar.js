@@ -10,24 +10,26 @@ import {
 import NextLink from "next/link";
 import { Logo } from "src/admin/components/icons/logo";
 import { Selector as SelectorIcon } from "src/admin/components/icons/selector";
-import { ChartBar as ChartBarIcon } from "src/admin/components/icons/chart-bar";
 import { NavItem } from "src/admin/components/dashboard/nav-item";
-import { Users as UsersIcon } from "src/admin/components/icons/users";
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
-import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
+import {LibraryBooks, LocalLibrary, SupervisedUserCircle } from '@mui/icons-material';
 
 const items = [
   {
-    href: "/admin/dashboard",
-    icon: <LocalLibraryIcon fontSize="small" />,
+    href: "/admin/cataloguing/painel",
+    icon: <LocalLibrary fontSize="small" />,
     title: "Catalogação",
   },
   {
-    href: '/admin/acervo',
-    icon: (<LibraryBooksIcon fontSize="small" />),
+    href: '/admin/cataloguing/acervo',
+    icon: (<LibraryBooks fontSize="small" />),
     title: 'Acervo'
+  }, 
+  {
+    href: '/admin/users/painel',
+    icon: (<SupervisedUserCircle fontSize="small" />),
+    title: 'Usuários'
   }
 ];
 
