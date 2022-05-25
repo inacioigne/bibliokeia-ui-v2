@@ -16,12 +16,13 @@ import { Users as UsersIcon } from "src/admin/components/icons/users";
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 
 const items = [
   {
     href: "/admin/dashboard",
-    icon: <ChartBarIcon fontSize="small" />,
-    title: "Dashboard",
+    icon: <LocalLibraryIcon fontSize="small" />,
+    title: "Catalogação",
   },
   {
     href: '/admin/acervo',
