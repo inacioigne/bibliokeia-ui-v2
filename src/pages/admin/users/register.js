@@ -1,53 +1,85 @@
+import * as React from 'react';
 import Head from "next/head";
-import { Box, Container, Typography, Divider, TextField } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Divider,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Input 
+} from "@mui/material";
 import { theme } from "src/theme";
 import { DashboardLayout } from "src/layouts/dashboard-layout";
 import Layout from "src/layouts/layoutMain";
 import { ThemeProvider } from "@mui/material/styles";
-import { useForm, Controller } from "react-hook-form";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import LoadingButton from "@mui/lab/LoadingButton";
+//import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
-// import {
-//   KeyboardDatePicker,
-//   MuiPickersUtilsProvider,
-// } from "@material-ui/pickers";
-// import DateFnsUtils from "@date-io/date-fns";
-//import LocalizationProvider from "@mui/lab/LocalizationProvider";
-//import AdapterDateFns from "@mui/lab/AdapterDateFns";
-//import DatePicker, { DatePickerProps } from "@mui/lab/DatePicker";
+import { IMaskInput } from 'react-imask';
+import PropTypes from 'prop-types';
+
+const TextMaskCustom = React.forwardRef(function TextMaskCustom(props, ref) {
+  const { onChange, ...other } = props;
+  return (
+    <IMaskInput
+      {...other}
+      mask="(00) 00000-0000"
+      definitions={{
+        '#': /[1-9]/,
+      }}
+      inputRef={ref}
+      onAccept={(value) => onChange({ target: { name: props.name, value } })}
+      overwrite
+    />
+  );
+});
+
+TextMaskCustom.propTypes = {
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default function UserRegister() {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      name: "",
-      surname: "",
-      birth: "",
-    },
-  });
-
-  const [value, setValue] = useState(null);
+  const [birth, setBirth] = useState(new Date());
+  const [sex, setSex] = useState("");
+  const [cellphone, setCellphone] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log("RG: ", data);
-  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  if (errors) {
-    console.log("ER: ", errors);
-  }
+    const data = {
+      name: event.target.name.value,
+      surname: event.target.surname.value,
+      birth: `${birth.getDate()}/${birth.getMonth() + 1}/${birth.getFullYear()}`,
+      sex: sex,
+      addressStreet : event.target.addressStreet.value,
+      addressNumber : event.target.addressNumber.value,
+      addressDistrict : event.target.addressDistrict.value,
+      addressCity : event.target.addressCity.value,
+      addressCep : event.target.addressCep.value,
+      email: event.target.email.value,
+      cellphone: cellphone
+    };
+
+    console.log(data);
+  };
 
   return (
     <>
       <Head>
         <title> BiblioKeia | Cadastro de usuários </title>
       </Head>
+      <Container>
+
+      
       <Box
         component="main"
         sx={{
@@ -56,70 +88,98 @@ export default function UserRegister() {
           backgroundColor: theme.palette.background.default,
         }}
       >
-        <Container maxWidth={false}>
-          <form>
+    
+          <form onSubmit={handleSubmit}>
             <Typography variant="h3" gutterBottom component="div">
               Identificação
             </Typography>
             <Divider />
             <Box sx={{ mt: 2, display: "flex", gap: 3 }}>
-              <Controller
-                control={control}
-                name="name"
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <TextField {...field} label="Nome" variant="standard" />
-                )}
-              />
-              <Controller
-                control={control}
-                name="surname"
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <TextField {...field} label="Sobrenome" variant="standard" />
-                )}
-              />
-
-
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-    <Controller
-                control={control}
-                name="birth"
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <DatePicker
-        label="Basic example"
-        value={value}
-        onChange={(newValue) => {
-          setValue(newValue);
-        }}
-        renderInput={(params) => <TextField {...params} />}
-      />
-                )}
-              />
-
-      
-    </LocalizationProvider>
-
-    
-          
-
-           
-             
-             
+              <TextField label="Nome" variant="standard" name="name" />
+              <TextField label="Sobrenome" variant="standard" name="surname" />
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="Data de Nascimento"
+                  inputFormat="dd/MM/yyyy"
+                  value={birth}
+                  onChange={(newValue) => {
+                    setBirth(newValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField {...params} helperText={null} />
+                  )}
+                />
+              </LocalizationProvider>
+              <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id="sex-label">
+                  Sexo
+                </InputLabel>
+                <Select
+                  labelId="sex-label"
+                  id="sex"
+                  value={sex}
+                  onChange={(event) => {
+                    setSex(event.target.value);
+                  }}
+                  label="Sexo"
+                >
+                  <MenuItem value="">
+                    <em></em>
+                  </MenuItem>
+                  <MenuItem value={"M"}>Masculino</MenuItem>
+                  <MenuItem value={"F"}>Feminino</MenuItem>
+                </Select>
+              </FormControl>
             </Box>
+            <Typography variant="h3" gutterBottom component="div">
+              Endereço
+            </Typography>
+            <Divider />
+            <Box sx={{ mt: 2, display: "flex", gap: 3 }}>
+            <TextField sx={{width: '30rem'}} label="Rua" variant="standard" name="addressStreet" />
+            <TextField sx={{width: '5rem'}}label="Número" variant="standard" name="addressNumber" />
+            <TextField label="Bairro" variant="standard" name="addressDistrict" />
+            <TextField label="Cidade" variant="standard" name="addressCity" />
+            <TextField label="CEP" variant="standard" name="addressCep" />
 
-            <LoadingButton
+            </Box>
+            <Typography variant="h3" gutterBottom component="div">
+              Contato
+            </Typography>
+            <Divider />
+            <Box sx={{ mt: 2, display: "flex", gap: 3 }}>
+            <TextField sx={{width: '30rem'}} label="Email" variant="standard" name="email" />
+            <FormControl variant="standard">
+        <InputLabel htmlFor="formatted-text-mask-input">Celular</InputLabel>
+        <Input
+          value={cellphone}
+          
+          onChange={(event) => {
+            setCellphone(event.target.value);
+          }}
+          name="cellphone"
+          id="formatted-text-mask-input"
+          inputComponent={TextMaskCustom}
+        />
+      </FormControl>
+
+            </Box>
+            
+            <Button variant="outlined" type="submit">
+              Salvar
+            </Button>
+
+            {/* <LoadingButton
               sx={{ m: 2 }}
-              onClick={handleSubmit(onSubmit)}
+              onClick={handleSubmit()}
               loading={loading}
               variant="outlined"
             >
               Salvar
-            </LoadingButton>
+            </LoadingButton> */}
           </form>
-        </Container>
       </Box>
+      </Container>
     </>
   );
 }
