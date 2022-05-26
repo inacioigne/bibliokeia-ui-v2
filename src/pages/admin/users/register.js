@@ -10,6 +10,14 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
+// import {
+//   KeyboardDatePicker,
+//   MuiPickersUtilsProvider,
+// } from "@material-ui/pickers";
+// import DateFnsUtils from "@date-io/date-fns";
+//import LocalizationProvider from "@mui/lab/LocalizationProvider";
+//import AdapterDateFns from "@mui/lab/AdapterDateFns";
+//import DatePicker, { DatePickerProps } from "@mui/lab/DatePicker";
 
 export default function UserRegister() {
   const {
@@ -71,23 +79,34 @@ export default function UserRegister() {
                   <TextField {...field} label="Sobrenome" variant="standard" />
                 )}
               />
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <Controller
-                  control={control}
-                  name="birth"
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <DatePicker
-                      label="Basic example"
-                      value={value}
-                      onChange={(newValue) => {
-                        setValue(newValue);
-                      }}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  )}
-                />
-              </LocalizationProvider>
+
+
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <Controller
+                control={control}
+                name="birth"
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <DatePicker
+        label="Basic example"
+        value={value}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        renderInput={(params) => <TextField {...params} />}
+      />
+                )}
+              />
+
+      
+    </LocalizationProvider>
+
+    
+          
+
+           
+             
+             
             </Box>
 
             <LoadingButton
