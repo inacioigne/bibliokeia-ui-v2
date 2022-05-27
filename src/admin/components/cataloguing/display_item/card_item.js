@@ -1,5 +1,4 @@
 import {
-  //Container,
   Card,
   CardHeader,
   Avatar,
@@ -16,12 +15,7 @@ import {
   DialogTitle,
   Stack,
   Snackbar,
-  //ButtonGroup,
-  //Popper,
-  //Grow,
-  //Paper,
-  //ClickAwayListener,
-  //MenuList,
+  Divider
 } from "@mui/material";
 import React from "react";
 import { red } from "@mui/material/colors";
@@ -168,7 +162,7 @@ export default function ItemCard() {
               </IconButton>
             </Tooltip>
           }
-          sx={{ borderBottom: 1 }}
+          
         />
         <Menu
           anchorEl={anchor}
@@ -212,7 +206,9 @@ export default function ItemCard() {
             <Avatar>M</Avatar> Tags Marc
           </MenuItem>
         </Menu>
+        <Divider />
         {/** CONTEÚDO */}
+
         <CardContent>
           {/** Record */}
           <Record value={value} />
