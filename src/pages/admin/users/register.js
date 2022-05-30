@@ -27,6 +27,7 @@ import { useState } from "react";
 import { IMaskInput } from "react-imask";
 import PropTypes from "prop-types";
 import { api } from "src/services/api";
+import { useRouter } from 'next/router'
 
 
 const TextMaskCustom = React.forwardRef(function TextMaskCustom(props, ref) {
@@ -51,6 +52,7 @@ TextMaskCustom.propTypes = {
 };
 
 export default function UserRegister() {
+  const router = useRouter();
   const [birth, setBirth] = useState(new Date());
   const [sex, setSex] = useState("");
   const [cellphone, setCellphone] = useState(null);
@@ -96,6 +98,9 @@ export default function UserRegister() {
             severity: "success",
             anchorOrigin: { vertical: "bottom", horizontal: "left" },
           });
+          console.log('ER: ', res)
+          router.push(`/admin/users/${res.data.id}`)
+
         }
       })
       .catch((error) => {
@@ -110,7 +115,7 @@ export default function UserRegister() {
         }
       });
 
-    console.log(data);
+    //console.log(data);
   };
 
   return (
