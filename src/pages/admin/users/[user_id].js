@@ -22,39 +22,40 @@ import {
   Snackbar,
 } from "@mui/material";
 import { api } from "src/services/api";
-import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import { red } from "@mui/material/colors";
-import { useState, useEffect  } from "react";
-import Image from "next/image";
-import { useRouter } from 'next/router'
-import ImgProfile from "src/admin/components/users/img_profile"
+//import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+//import { red } from "@mui/material/colors";
+import { useState, useEffect } from "react";
+//import Image from "next/image";
+//import { useRouter } from "next/router";
+import ImgProfile from "src/admin/components/users/img_profile";
+import Loan from "src/admin/components/circulation/loan";
 
-export default function UserDetails({user_id}) {
-
+export default function UserDetails({ user_id }) {
   const [image, setImage] = useState(null);
   const [userImg, setUserImg] = useState(null);
   const [data, setData] = useState(null);
   const [btnVisible, setBtnVisible] = useState(true);
-  
+
+  //MODAL
+  const [open, setOpen] = useState(false);
+  const handleClose = (value) => {
+    setOpen(false);
+    //setSelectedValue(value);
+  };
+
   const [createObjectURL, setCreateObjectURL] = useState(null);
 
   const getUser = async () => {
     const response = await api.get(`/user/${user_id}`);
     setData(response.data);
     if (response.data.img) {
-      setUserImg(response.data.img)
-
+      setUserImg(response.data.img);
     }
-    
-
   };
 
-  useEffect(() => {  
-    getUser()  
-
-  }, [])
-
-
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const uploadToClient = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -63,7 +64,6 @@ export default function UserDetails({user_id}) {
       setImage(i);
       setCreateObjectURL(URL.createObjectURL(i));
       console.log("IMG: ", createObjectURL);
-
     }
   };
 
@@ -82,8 +82,7 @@ export default function UserDetails({user_id}) {
       const res = await api.get(`/user/${user_id}`);
       const img = await res.data.img;
       setUserImg(img);
-      setBtnVisible(false)
-
+      setBtnVisible(false);
     }
 
     console.log("RES: ", response);
@@ -97,31 +96,13 @@ export default function UserDetails({user_id}) {
   return (
     <Box sx={{ p: 2 }}>
       <Card>
-        <CardHeader title={<Typography variant="h5">{data?.name}</Typography>} />
+        <CardHeader
+          title={<Typography variant="h5">{data?.name}</Typography>}
+        />
         <Divider />
-       
+
         <CardContent>
           <Box sx={{ display: "flex", gap: 2 }}>
-      {/*       {createObjectURL && (
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  "& > *": {
-                    m: 1,
-                  },
-                }}
-              >
-                <Image src={createObjectURL} width={155} height={200} />
-                <ButtonGroup sx={ btnVisible ? { display: "flex"} : { display: "None"} }
-                size="small" aria-label="small button group">
-                  <Button key="cancel">Cancelar</Button>
-                  <Button key="salve" onClick={uploadToServer}>Salvar</Button>
-                </ButtonGroup>
-              </Box>
-            )}
- */}
             <form onSubmit={uploadToServer}>
               <Input
                 sx={{ display: "none" }}
@@ -131,37 +112,12 @@ export default function UserDetails({user_id}) {
                 id="img_profile"
               />
               <label htmlFor="img_profile">
-              <ImgProfile userImg={userImg} 
-              createObjectURL={createObjectURL}
-              uploadToServer={uploadToServer}
-              btnVisible={btnVisible}
-              />
-                {/* <Box
-                  sx={ createObjectURL ? {display: 'None'} :
-                      {
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          width: 155,
-                          height: 200,
-                          border: 1,
-                        }
-                  }
-                >
-                { userImg ? 
-                  <Image src={userImg} width={155} height={200} /> :
-
-                  <Avatar
-                    sx={{
-                      bgcolor: red[500],
-                      width: 80,
-                      height: 80,
-                    }}
-                    aria-label="recipe"
-                  >
-                    <AddAPhotoIcon sx={{ fontSize: 50 }} />
-                  </Avatar> }
-                </Box> */}
+                <ImgProfile
+                  userImg={userImg}
+                  createObjectURL={createObjectURL}
+                  uploadToServer={uploadToServer}
+                  btnVisible={btnVisible}
+                />
               </label>
             </form>
             <Box>
@@ -252,10 +208,25 @@ export default function UserDetails({user_id}) {
                   {`${data?.cellphone}`}
                 </Typography>
               </Box>
+              <Button 
+              variant="outlined" 
+              size="small" 
+              sx={{ mt: 2 }} 
+              onClick={() => {
+                setOpen(true)
+              }}
+              >
+                Emprestar
+              </Button>
             </Box>
           </Box>
-        </CardContent> 
+        </CardContent>
       </Card>
+      <Loan 
+        open={open}
+        onClose={handleClose}
+        user={user_id}
+      />
     </Box>
   );
 }
@@ -263,13 +234,7 @@ export default function UserDetails({user_id}) {
 export async function getServerSideProps(context) {
   //const router = useRouter();
   const { user_id } = context.query;
-  //console.log("User_ID: ", user_id);
-  // Fetch data from external API
-  /* const res = await api.get(`/user/${user_id}`);
-  const data = await res.data; */
-  //console.log('User: ', res)
 
-  // Pass data to the page via props
   return { props: { user_id } };
 }
 
