@@ -8,12 +8,15 @@ import {
   DialogContent,
   DialogActions,
   Button,
+  Typography,
+  Avatar
 } from "@mui/material";
 import PropTypes from "prop-types";
-import AddIcon from "@mui/icons-material/Add";
+import { Add, Remove } from "@mui/icons-material";
 import { useForm, Controller } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { api } from "src/services/api"
+import { pink  } from '@mui/material/colors';
 
 export default function Loan(props) {
   const { onClose, value: valueProp, open, user, ...other } = props;
@@ -36,11 +39,20 @@ export default function Loan(props) {
     },
   });
   const onSubmit = data => {
-    setRegistros(prevState => [...prevState, data.exemplar])
+    console.log(exemplares.length)
+    if (exemplares.length < 5) {
+      setRegistros(prevState => [...prevState, data.exemplar])
     api.get(`/acervo/exemplar/${data.exemplar}`)
     .then((response) => {
       setExemplares(prevState => [...prevState, response.data])
     })
+      
+    } else {
+      alert('Só é possível emprestar 5 obras por usuário.')
+
+    }
+
+    
     
     
 
@@ -61,7 +73,7 @@ export default function Loan(props) {
     >
       <DialogTitle>Empréstimo</DialogTitle>
       <DialogContent dividers>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
               name="exemplar"
@@ -71,17 +83,53 @@ export default function Loan(props) {
               )}
             />
 
-            <IconButton color="primary" type="submit">
-              <AddIcon />
+            <IconButton color="primary" type="submit" size="large" edge="end">
+              <Add  fontSize="inherit" />
             </IconButton>
           </form>
         </Box>
         <Box>
+          
         {exemplares.map((exemplar, index) => (
-          <Box key={index}>
-          <h3>{exemplar.title}</h3>
+          <>
+         
+          <Divider sx={{mt:2}}/>
+          <Box key={index} sx={{ mt:2, display: "flex", alignItems: "center"}}>
+            <Box sx={{ display: "flex"}}>
+
+           
             
+            <Typography
+                  variant="subtitle1"
+                  color="text.primary"
+                  component="div"
+                  sx={{mr:1}}
+                >
+                  {exemplar.title} /
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  component="div"
+                >
+                  {exemplar.exemplar}
+                </Typography>
+                </Box>
+                <IconButton color="primary" onClick={() => {
+                  const ex = exemplares.filter((e, i) =>{
+                    return i !== index
+
+                  })
+                  setExemplares(ex)
+                }}>
+                  <Avatar sx={{ width: 24, height: 24, bgcolor: pink[500]}}>
+                  <Remove />
+
+                  </Avatar>
+              
+            </IconButton>
           </Box>
+          </>
             
 
         ))}
@@ -92,6 +140,7 @@ export default function Loan(props) {
           autoFocus
           onClick={() => {
             onClose();
+            setExemplares([])
           }}
         >
           Cancel
