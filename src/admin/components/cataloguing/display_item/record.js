@@ -67,10 +67,14 @@ export default function Record(props) {
           >
             <Button>Publicação</Button>
             <Button style={{ textTransform: "none" }}>
-              {`${item.datafields[260].subfields.a}
-              ${item.datafields[260].subfields.b}
-              ${item.datafields[260].subfields.c}
-              `}
+              { item.datafields[260] ? (
+                `${item.datafields[260].subfields.a}
+                ${item.datafields[260].subfields.b}
+                ${item.datafields[260].subfields.c}`
+              ) :
+              "Ops!!"
+              
+            }
             </Button>
           </ButtonGroup> :
           <Skeleton variant="rectangular" width={300} height={35} /> }

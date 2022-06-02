@@ -20,6 +20,10 @@ import {
   DialogTitle,
   Stack,
   Snackbar,
+  TableContainer,
+  Paper,
+  Table,
+  TableHead 
 } from "@mui/material";
 import { api } from "src/services/api";
 //import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
@@ -29,6 +33,7 @@ import { useState, useEffect } from "react";
 //import { useRouter } from "next/router";
 import ImgProfile from "src/admin/components/users/img_profile";
 import Loan from "src/admin/components/circulation/loan";
+import ItemsLoan from "src/admin/components/circulation/items_loan";
 
 export default function UserDetails({ user_id }) {
   const [image, setImage] = useState(null);
@@ -208,25 +213,23 @@ export default function UserDetails({ user_id }) {
                   {`${data?.cellphone}`}
                 </Typography>
               </Box>
-              <Button 
-              variant="outlined" 
-              size="small" 
-              sx={{ mt: 2 }} 
-              onClick={() => {
-                setOpen(true)
-              }}
+              <Button
+                variant="outlined"
+                size="small"
+                sx={{ mt: 2 }}
+                onClick={() => {
+                  setOpen(true);
+                }}
               >
                 Emprestar
               </Button>
             </Box>
           </Box>
+          <ItemsLoan />
+          
         </CardContent>
       </Card>
-      <Loan 
-        open={open}
-        onClose={handleClose}
-        user={user_id}
-      />
+      <Loan open={open} onClose={handleClose} user={user_id} />
     </Box>
   );
 }

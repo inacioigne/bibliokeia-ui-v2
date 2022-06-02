@@ -30,6 +30,7 @@ export default function FormRegister({ display, setVisible, alert }) {
 
   async function signUp(data) {
     setLoading(!loading);
+    console.log(data)
 
     api
       .post("user/register", data)
