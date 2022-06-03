@@ -23,14 +23,10 @@ import {
   TableContainer,
   Paper,
   Table,
-  TableHead 
+  TableHead,
 } from "@mui/material";
 import { api } from "src/services/api";
-//import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-//import { red } from "@mui/material/colors";
 import { useState, useEffect } from "react";
-//import Image from "next/image";
-//import { useRouter } from "next/router";
 import ImgProfile from "src/admin/components/users/img_profile";
 import Loan from "src/admin/components/circulation/loan";
 import ItemsLoan from "src/admin/components/circulation/items_loan";
@@ -39,6 +35,7 @@ export default function UserDetails({ user_id }) {
   const [image, setImage] = useState(null);
   const [userImg, setUserImg] = useState(null);
   const [data, setData] = useState(null);
+  const [loans, setLoans] = useState(null);
   const [btnVisible, setBtnVisible] = useState(true);
 
   //MODAL
@@ -58,8 +55,24 @@ export default function UserDetails({ user_id }) {
     }
   };
 
+  const getLoans = async () => {
+    await api.get(`circulation/loan/${user_id}`)
+    .then((response) => {
+      if (response.status == 200) {
+        setLoans(response.data);
+      }
+    }).catch(function (error) {
+      
+      if (error.response.status == 404) {
+        setLoans(null)
+      }
+    })
+    
+  };
+
   useEffect(() => {
     getUser();
+    getLoans();
   }, []);
 
   const uploadToClient = (event) => {
@@ -225,11 +238,10 @@ export default function UserDetails({ user_id }) {
               </Button>
             </Box>
           </Box>
-          <ItemsLoan />
-          
+          {loans && <ItemsLoan loans={loans} setLoans={setLoans} />}
         </CardContent>
       </Card>
-      <Loan open={open} onClose={handleClose} user={user_id} />
+      <Loan open={open} onClose={handleClose} user={user_id} getLoans={getLoans}/>
     </Box>
   );
 }

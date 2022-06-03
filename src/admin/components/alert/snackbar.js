@@ -2,9 +2,7 @@ import { Snackbar, Alert, IconButton } from "@mui/material";
 import { useState, useEffect } from "react";
 import { Close } from "@mui/icons-material";
 
-export default function Snack({ open, duration, msg, severity }) {
-    //console.log('S: ', open)
-    
+export default function Snack({ open, duration, msg, severity }) {    
     
   const [snack, setSnack] = useState(open);
 

@@ -8,10 +8,13 @@ import {
   Typography,
   TableRow,
   TableBody,
-  Button
+  Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import { api } from "src/services/api";
+import Snack from "src/admin/components/alert/snack";
+import { useState } from "react";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,19 +36,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(title, exemplar, loan, due, protein) {
-  return { title, exemplar, loan, due, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", "22-0001", "01/06/2022", "09/06/2022", 4.0),
-  createData("Ice cream sandwich", "01/06/2022", "09/06/2022", 37, 4.3),
-  createData("Eclair", "22-0003", "01/06/2022", "09/06/2022", 6.0),
-  createData("Cupcake", "22-0003", "01/06/2022", "09/06/2022", 4.3),
-  createData("Gingerbread", "22-0003", "01/06/2022", "09/06/2022", 3.9),
-];
-
-export default function ItemsLoan() {
+export default function ItemsLoan({ loans, setLoans }) {
+  const [snack, setSnack] = useState(false);
+  console.log('L: ', snack)
   return (
     <Box sx={{ mt: 2 }}>
       <Divider />
@@ -64,21 +57,34 @@ export default function ItemsLoan() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name}>
+            {loans.map((loan, index) => (
+              <StyledTableRow key={index}>
                 <StyledTableCell component="th" scope="row">
-                  {row.title}
+                  {loan.title}
                 </StyledTableCell>
-                <StyledTableCell align="right">{row.exemplar}</StyledTableCell>
-                <StyledTableCell align="right">{row.loan}</StyledTableCell>
-                <StyledTableCell align="right">{row.due}</StyledTableCell>
+                <StyledTableCell align="right">{loan.exemplar}</StyledTableCell>
+                <StyledTableCell align="right">{loan.loan_at}</StyledTableCell>
+                <StyledTableCell align="right">{loan.due}</StyledTableCell>
                 <StyledTableCell align="right">
                   <Button
                     variant="outlined"
                     size="small"
                     // sx={{ mt: 2 }}
-                    onClick={() => {
-                      console.log("ok");
+                    onClick={async () => {
+                      await api
+                        .post(`circulation/devolution/${loan.exemplar}`)
+                        .then((response) => {
+                          if (response.status == 200) {
+                            const newLoans = loans.filter((e, i) => {
+                              if (i != index) {
+                                return e;
+                              }
+                            });
+                            setLoans(newLoans);
+                            setSnack(true)
+                    
+                          }
+                        });
                     }}
                   >
                     Devolver
@@ -89,6 +95,9 @@ export default function ItemsLoan() {
           </TableBody>
         </Table>
       </TableContainer>
+      { snack && <Snack open={true} />}
+
+      
     </Box>
   );
 }

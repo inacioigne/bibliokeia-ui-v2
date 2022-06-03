@@ -14,21 +14,25 @@ import {
 import PropTypes from "prop-types";
 import { Add, Remove } from "@mui/icons-material";
 import { useForm, Controller } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { api } from "src/services/api"
 import { pink  } from '@mui/material/colors';
 
 export default function Loan(props) {
-  const { onClose, value: valueProp, open, user, ...other } = props;
+  const { onClose, getLoans, value: valueProp, open, user, ...other } = props;
   const [exemplares, setExemplares] = useState([])
   const [registros, setRegistros] = useState([])
 
-  const makeLoan = () => {
-    console.log(exemplares, registros, user);
-    
+  const makeLoan = () => {    
     api.post(`/circulation/loan/${user}`, registros)
     .then((response) => {
-      console.log(response)
+      if (response.status == 200) {
+        handleClose()
+        getLoans()
+        //console.log(response)
+
+      }
+     
     })
 
   }
@@ -51,15 +55,12 @@ export default function Loan(props) {
       alert('Só é possível emprestar 5 obras por usuário.')
 
     }
-
-    
-    
-    
-
   }
 
   const handleClose = () => {
-    onClose(selectedValue);
+    //onClose(selectedValue);
+    onClose();
+    setExemplares([])
   };
 
   return (
@@ -138,10 +139,7 @@ export default function Loan(props) {
       <DialogActions>
         <Button
           autoFocus
-          onClick={() => {
-            onClose();
-            setExemplares([])
-          }}
+          onClick={handleClose}
         >
           Cancel
         </Button>
@@ -158,5 +156,5 @@ export default function Loan(props) {
 Loan.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  selectedValue: PropTypes.string.isRequired,
+  //selectedValue: PropTypes.string.isRequired,
 };
