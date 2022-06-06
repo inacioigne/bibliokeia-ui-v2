@@ -8,7 +8,6 @@ import {
   Tab,
   Box,
   IconButton,
-  //Alert,
   Zoom,
   Fab,
 } from "@mui/material";
@@ -26,12 +25,10 @@ import PropTypes from "prop-types";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Snack from "src/admin/components/alert/snackbar";
+import Subject from "src/admin/components/cataloguing/thesaurus/subject";
 
 function ScrollTop(props) {
   const { children, window } = props;
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
     target: window ? window() : undefined,
     disableHysteresis: true,
@@ -66,10 +63,6 @@ function ScrollTop(props) {
 
 ScrollTop.propTypes = {
   children: PropTypes.element.isRequired,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };
 
@@ -253,6 +246,7 @@ export default function CreateBook(props) {
           <Tab label="Tags 8XX" {...a11yProps(8)} sx={{ borderRight: 1 }} />
         </Tabs>
         <form onSubmit={handleSubmit(onSubmit)}>
+          {/* TAGS 0XX */}
           <Box
             sx={
               value == 0 ? { display: "grid", rowGap: 3 } : { display: "none" }
@@ -269,6 +263,7 @@ export default function CreateBook(props) {
               />
             ))}
           </Box>
+          {/* TAGS 1XX */}
           <Box
             sx={
               value == 1 ? { display: "grid", rowGap: 3 } : { display: "none" }
@@ -283,6 +278,7 @@ export default function CreateBook(props) {
               />
             ))}
           </Box>
+          {/* TAGS 2XX */}
           <Box
             sx={
               value == 2 ? { display: "grid", rowGap: 3 } : { display: "none" }
@@ -298,6 +294,7 @@ export default function CreateBook(props) {
               />
             ))}
           </Box>
+          {/* TAGS 3XX */}
           <Box
             sx={
               value == 3 ? { display: "grid", rowGap: 3 } : { display: "none" }
@@ -307,6 +304,7 @@ export default function CreateBook(props) {
               <Datafield key={index} control={control} metadata={field} />
             ))}
           </Box>
+          {/* TAGS 4XX */}
           <Box
             sx={
               value == 4 ? { display: "grid", rowGap: 3 } : { display: "none" }
@@ -316,6 +314,7 @@ export default function CreateBook(props) {
               <Datafield key={index} control={control} metadata={field} />
             ))}
           </Box>
+          {/* TAGS 5XX */}
           <Box
             sx={
               value == 5 ? { display: "grid", rowGap: 3 } : { display: "none" }
@@ -325,18 +324,20 @@ export default function CreateBook(props) {
               <Datafield key={index} control={control} metadata={field} />
             ))}
           </Box>
+          {/* TAGS 6XX */}
           <Box
             sx={
               value == 6 ? { display: "grid", rowGap: 3 } : { display: "none" }
             }
           >
-            <Datafield
+          <Subject />
+            {/* <Datafield
               control={control}
               metadata={tag650}
               fields={Fields650}
               append={Append650}
               remove={Remove650}
-            />
+            /> */}
           </Box>
           <Box
             sx={
@@ -382,12 +383,11 @@ export default function CreateBook(props) {
           />
         )}
         <Snack
-            open={snackSuccess}
-            duration={6000}
-            msg={'Item registrado com sucesso!'}
-            severity={"success"}
-          />
-
+          open={snackSuccess}
+          duration={6000}
+          msg={"Item registrado com sucesso!"}
+          severity={"success"}
+        />
       </Box>
       <ScrollTop {...props}>
         <Fab color="secondary" size="small" aria-label="scroll back to top">

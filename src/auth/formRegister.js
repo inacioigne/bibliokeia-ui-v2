@@ -5,8 +5,13 @@ import {
   Card,
   CardHeader,
   Avatar,
+  FormControl,
+  InputLabel,
+  Input,
+  InputAdornment,
+  IconButton
 } from "@mui/material/";
-import CloseIcon from "@mui/icons-material/Close";
+import { Close, Visibility, VisibilityOff } from "@mui/icons-material";
 import { red } from "@mui/material/colors";
 import { useForm, Controller } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
@@ -27,11 +32,11 @@ export default function FormRegister({ display, setVisible, alert }) {
   });
 
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
 
   async function signUp(data) {
     setLoading(!loading);
-    console.log(data)
-
+    //console.log(data)
     api
       .post("user/register", data)
       .then((res) => {
@@ -56,7 +61,7 @@ export default function FormRegister({ display, setVisible, alert }) {
             anchorOrigin: { vertical: "top", horizontal: "center" },
           });
         }
-      });
+      }); 
   }
 
   return (
@@ -69,7 +74,7 @@ export default function FormRegister({ display, setVisible, alert }) {
             }}
             sx={{ bgcolor: red[500], cursor: "pointer" }}
           >
-            <CloseIcon />
+            <Close />
           </Avatar>
         }
       />
@@ -109,15 +114,38 @@ export default function FormRegister({ display, setVisible, alert }) {
               )}
             />
             {errors.email && "Email é obrigatório"}
+            
             <Controller
               control={control}
               name="password"
               rules={{ required: true }}
               render={({ field }) => (
-                <TextField {...field} label="Senha" variant="standard" />
+                // <TextField {...field} label="Senha" variant="standard" />
+                <FormControl variant="standard">
+            <InputLabel htmlFor="standard-adornment-password">Senha</InputLabel>
+            <Input {...field}
+            id="standard-adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            //value={values.password}
+            //onChange={handleChange('password')}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={() => { setShowPassword(!showPassword)}}
+                  //onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+              
+            </FormControl>
               )}
             />
             {errors.password && "Você esqueceu a senha"}
+            
 
             <Box
               sx={{ display: "flex", justifyContent: "center" }}

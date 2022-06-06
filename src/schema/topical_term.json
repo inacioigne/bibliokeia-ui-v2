@@ -1,0 +1,137 @@
+{
+    "datafields": [
+      {
+        "tag": "040",
+        "repeatable": false,
+        "description": "040 - FONTE DA CATALOGAÇÃO",
+        "indicators": {
+          "Ind1": false,
+          "Ind2": false
+        },
+        "subfields": [
+          {
+            "value": "a",
+            "label": "a - Código da Agência Catalogadora",
+            "defaultValue": "BR-MnINPA"
+          },
+          {
+            "value": "b",
+            "label": "b - Idioma da catalogação",
+            "defaultValue": "por"
+          },
+          {
+            "value": "d",
+            "label": "d - Agência que alterou o registro"
+          }
+        ]
+      },
+      {
+        "tag": "150",
+        "repeatable": false,
+        "expanded": true,
+        "description": "150 - Heading-Topical Term ",
+        "indicators": {
+            "Ind1": false,
+            "Ind2": false
+          },
+        "subfields": [
+          {
+            "value": "a",
+            "label": "a - Topical term or geographic name entry element "
+          },
+          {
+            "value": "b",
+            "label": "b - Topical term following geographic name entry element "
+          }
+        ]
+      },
+      {
+        "tag": "450",
+        "repeatable": true,
+        "description": "450 - See From Tracing-Topical Term",
+        "indicators": {
+            "Ind1": false,
+            "Ind2": false
+          },
+        "subfields": [
+          {
+            "value": "a",
+            "label": "a - Topical term or geographic name entry element"
+          },
+          {
+            "value": "b",
+            "label": "b - Topical term following geographic name entry element"
+          }
+        ]
+      },
+      {
+        "tag": "550",
+        "expanded": true,
+        "description": "550 - See Also From Tracing-Topical Term",
+        "indicators": {
+            "Ind1": false,
+            "Ind2": false
+          },
+        "subfields": [
+          {
+            "value": "a",
+            "label": "a - Topical term or geographic name entry element"
+          },
+          {
+            "value": "b",
+            "label": "b - Topical term following geographic name entry element"
+          }
+        ]
+      },
+      {
+        "tag": "670",
+        "description": "670 - Source Data Found",
+        "indicators": {
+          "Ind1": false,
+          "Ind2": false
+        },
+        "subfields": [
+          {
+            "value": "a",
+            "label": "a - Source citation "
+          }
+        ]
+      },
+      {
+        "tag": "750",
+        "description": "750 - Established Heading Linking Entry-Topical Term",
+        "indicators": {
+            "Ind1": false,
+          "Ind2": {
+            "defaultValue": "0",
+            "options": [
+              {
+                "value": "0",
+                "label": "0 - Library of Congress Subject Headings"
+              },
+              {
+                "value": "1",
+                "label": "1 - LC subject headings for children's literature"
+              },
+              {
+                "value": "2",
+                "label": "2 - Medical Subject Headings"
+              }
+            ]
+          }
+          
+        },
+        "subfields": [
+          {
+            "value": "a",
+            "label": "a - Topical term or geographic name entry element"
+          },
+          {
+            "value": "b",
+            "label": "b - Topical term following geographic name entry element "
+          }
+        ]
+      }
+    ]
+  }
+  
