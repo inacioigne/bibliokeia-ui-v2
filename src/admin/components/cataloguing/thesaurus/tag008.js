@@ -200,114 +200,88 @@ export default function Tag008(props) {
             </TextField>
           )}
         />
-        {/** 18-21 Ilustrações */}
+        {/** 10 - Descriptive cataloging rules */}
         <Controller
-          name={"tag008.tag008-21"}
+          name={"tag008.tag008-10"}
           control={props.control}
-          defaultValue="#"
+          defaultValue="a"
           render={({ field }) => (
             <TextField
               select
               {...field}
-              label="18-21 Ilustrações"
+              label="10 - Descriptive cataloging rules"
               variant="outlined"
               size="small"
               sx={{ width: 170 }}
             >
-              <MenuItem key="#" value="#">
-                # - Sem ilustrações
-              </MenuItem>
               <MenuItem key="a" value="a">
-                a - Com ilustrações
+              a - Earlier rules
               </MenuItem>
               <MenuItem key="b" value="b">
-                b - Mapas
+              b - AACR 1
               </MenuItem>
               <MenuItem key="c" value="c">
-                c - Retratos
+              c - AACR 2
               </MenuItem>
               <MenuItem key="d" value="d">
-                d - Gráficos
+              d - AACR 2 compatible heading
               </MenuItem>
-              <MenuItem key="e" value="e">
-                e - Plantas
+              <MenuItem key="z" value="z">
+              z - Other
               </MenuItem>
-              <MenuItem key="f" value="f">
-                f - Lâminas
+              <MenuItem key="n" value="n">
+              n - Not applicable
               </MenuItem>
-              <MenuItem key="g" value="g">
-                g - Música
+              <MenuItem key="|" value="|">
+                | - Não codificado
               </MenuItem>
-              <MenuItem key="h" value="h">
-                h - Fac-símiles
+            </TextField>
+          )}
+        />
+        {/** 11 - Subject heading system/thesaurus */}
+        <Controller
+          name={"tag008.tag008_11"}
+          control={props.control}
+          defaultValue="a"
+          render={({ field }) => (
+            <TextField
+              {...field}
+              select
+              label="11 - Subject heading"
+              variant="outlined"
+              size="small"
+              sx={{ width: 170 }}
+            >
+              
+              <MenuItem key="a" value="a">
+              a - Library of Congress Subject Headings
               </MenuItem>
-              <MenuItem key="i" value="i">
-                i - Escudo ou brasões
+              <MenuItem key="b" value="b">
+              b - LC subject headings for children's literature
               </MenuItem>
-              <MenuItem key="j" value="j">
-                j - Tabela genealógica
+              <MenuItem key="c" value="c">
+              c - Medical Subject Headings
+              </MenuItem>
+              <MenuItem key="d" value="d">
+              d - National Agricultural Library subject authority file
               </MenuItem>
               <MenuItem key="k" value="k">
-                k - Fórmulas
+              k - Canadian Subject Headings
               </MenuItem>
-              <MenuItem key="l" value="l">
-                l - Amostras
+              <MenuItem key="n" value="n">
+              n - Not applicable
               </MenuItem>
-              <MenuItem key="m" value="m">
-                m - Gravações
+              <MenuItem key="r" value="r">
+              r - Art and Architecture Thesaurus
               </MenuItem>
-              <MenuItem key="o" value="o">
-                o - Fotografias
+              <MenuItem key="s" value="s">
+              s - Sears List of Subject Heading
               </MenuItem>
-              <MenuItem key="p" value="p">
-                p - Iluminuras
+              <MenuItem key="r" value="r">
+              v - Répertoire de vedettes-matière
               </MenuItem>
-              <MenuItem key="|" value="|">
-                | - Não codificado
-              </MenuItem>
-            </TextField>
-          )}
-        />
-        {/** 22 - Público alvo */}
-        <Controller
-          name={"tag008.tag008-22"}
-          control={props.control}
-          defaultValue="#"
-          render={({ field }) => (
-            <TextField
-              {...field}
-              select
-              label="22 - Público alvo"
-              variant="outlined"
-              size="small"
-              sx={{ width: 170 }}
-            >
-              <MenuItem key="#" value="#">
-                # - Sem publico especifico
-              </MenuItem>
-              <MenuItem key="a" value="a">
-                a - Pré-escolar
-              </MenuItem>
-              <MenuItem key="b" value="b">
-                b - Infantil (1o. ciclo)
-              </MenuItem>
-              <MenuItem key="c" value="c">
-                c - Pré-adolescente (2o. ciclo)
-              </MenuItem>
-              <MenuItem key="d" value="d">
-                d - Adolescente
-              </MenuItem>
-              <MenuItem key="e" value="e">
-                e - Adulto
-              </MenuItem>
-              <MenuItem key="f" value="f">
-                f - Especializado
-              </MenuItem>
-              <MenuItem key="g" value="g">
-                g - Geral
-              </MenuItem>
-              <MenuItem key="h" value="h">
-                j - Juvenil
+              <MenuItem key="s" value="s">
+              z - Other
               </MenuItem>
               <MenuItem key="|" value="|">
                 | - Não codificado
@@ -315,50 +289,37 @@ export default function Tag008(props) {
             </TextField>
           )}
         />
-        {/** 23 - Forma do documento */}
+        {/** 12 - Type of series */}
         <Controller
           name={"tag008.tag008-23"}
           control={props.control}
-          defaultValue="#"
+          defaultValue="a"
           render={({ field }) => (
             <TextField
               {...field}
               select
-              label="23 - Público alvo"
+              label="12 - Type of series"
               variant="outlined"
               size="small"
               sx={{ width: 170 }}
             >
-              <MenuItem key="#" value="#">
-                # - Nenhum dos códigos seguintes
-              </MenuItem>
+     
               <MenuItem key="a" value="a">
-                a - Microfilme
+              a - Monographic series
               </MenuItem>
               <MenuItem key="b" value="b">
-                b - Microficha
+              b - Multipart item
               </MenuItem>
               <MenuItem key="c" value="c">
-                c - Microopaca
+              c - Series-like phrase
               </MenuItem>
-              <MenuItem key="d" value="d">
-                d - Impressão ampliada
+              <MenuItem key="n" value="n">
+              n - Not applicable
               </MenuItem>
-              <MenuItem key="f" value="f">
-                f - Braile
+              <MenuItem key="z" value="z">
+              z - Other
               </MenuItem>
-              <MenuItem key="o" value="o">
-                o – Online
-              </MenuItem>
-              <MenuItem key="q" value="q">
-                q - Dispositivo eletrônico direto
-              </MenuItem>
-              <MenuItem key="r" value="r">
-                r - Reprodução em impressão regular
-              </MenuItem>
-              <MenuItem key="s" value="s">
-                s – Eletrônica
-              </MenuItem>
+              
               <MenuItem key="|" value="|">
                 | - Não codificado
               </MenuItem>

@@ -22,6 +22,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Datafield from "src/admin/components/cataloguing/marc/datafield";
 import schema from "src/schema/topical_term.json";
+import Time from "src/lib/time";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -77,7 +78,7 @@ const [tag450] = schema.datafields.filter((field) => {
 });
 
 const [tag550] = schema.datafields.filter((field) => {
-  return field.tag == "450";
+  return field.tag == "550";
 });
 
 const [tag670] = schema.datafields.filter((field) => {
@@ -107,8 +108,7 @@ export default function Create({ open, setCataloguing }) {
     defaultValues: {
       datafields: {
         450: [{}],
-        550: [{}],
-        856: [{}],
+        550: [{}]
       },
     },
   });
@@ -126,7 +126,51 @@ export default function Create({ open, setCataloguing }) {
   } = useFieldArray({ control, name: "datafields[550]" });
 
   const onSubmit = (data) => {
-    console.log("AU: ", data);
+    const leader = Object.values(data.leader);
+    const tag008 = Object.values(data.tag008);
+
+    for (let [k, v] of Object.entries(data.datafields)) {
+      if (!Array.isArray(v)) {
+       
+         for (let [sk, sv] of Object.entries(v.subfields)) {
+          if (!sv) {
+            delete data.datafields[k].subfields[sk];
+            if (Object.keys(data.datafields[k].subfields).length == 0) {
+              delete data.datafields[k];
+            }
+          }
+        } 
+      } else {
+
+        for (let [index, field] of v.entries()) {
+        
+
+             for (let [sk, sv] of Object.entries(field.subfields)) {
+            if (!sv) {
+              delete data.datafields[k][index].subfields[sk];
+              if (
+                Object.keys(data.datafields[k][index].subfields).length == 0
+              ) {
+                delete data.datafields[k];
+              }
+            }
+          }   
+        } 
+      } 
+    }
+    const marc = {
+      leader: leader.join(""),
+      controlfields: {
+        "003": "BR-MnINPA",
+        "005": Time(),
+        "008": tag008.join(""),
+      },
+      datafields: data.datafields,
+    };
+
+    console.log(marc)
+
+    
   };
 
   return (

@@ -166,7 +166,7 @@ export default function CreateBook(props) {
 
   const onSubmit = (data) => {
     setLoading(!loading);
-    const leader = Object.values(data.leader);
+    const leader = Object.values(data.leader); 
     const tag008 = Object.values(data.tag008);
 
     //EXCLUI SUBCAMPOS VAZIOS

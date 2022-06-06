@@ -67,6 +67,7 @@
       {
         "tag": "550",
         "expanded": true,
+        "repeatable": true,
         "description": "550 - See Also From Tracing-Topical Term",
         "indicators": {
             "Ind1": false,
