@@ -140,7 +140,7 @@ export default function CreateBook(props) {
   } = useForm({
     defaultValues: {
       datafields: {
-        650: [{}],
+        //650: [{}],
         700: [{}],
         856: [{}],
       },
@@ -209,7 +209,7 @@ export default function CreateBook(props) {
       /** POST ITEM */
     }
     api
-      .post("/cataloging/item/create", marc)
+      .post("/cataloguing/item/create", marc)
       .then(function (response) {
         if (response.status == 201) {
           setsnackSuccess(true);

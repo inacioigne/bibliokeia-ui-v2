@@ -23,6 +23,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import Datafield from "src/admin/components/cataloguing/marc/datafield";
 import schema from "src/schema/topical_term.json";
 import Time from "src/lib/time";
+import { api } from "src/services/api";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -168,7 +169,21 @@ export default function Create({ open, setCataloguing }) {
       datafields: data.datafields,
     };
 
-    console.log(marc)
+    api
+      .post("/cataloguing/authority/150", marc)
+      .then(function (response) {
+        if (response.status == 201) {
+          //setsnackSuccess(true);
+          //router.push(`/admin/cataloguing/${response.data.item_id}`);
+          console.log(response);
+        }
+        //console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    //console.log(marc)
 
     
   };
