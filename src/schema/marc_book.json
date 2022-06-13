@@ -104,8 +104,8 @@
       },
       "subfields": [
         {
-          "value": "b",
-          "label": "Cutter"
+          "value": "a",
+          "label": "a - Chamada"
         }
       ]
     },
@@ -619,7 +619,7 @@
         {
           "value": "a",
           "label": "a - Localização",
-          "defaultValue": "Bibloteca do INPA"
+          "defaultValue": "Obras gerais"
         },
         {
           "value": "b",

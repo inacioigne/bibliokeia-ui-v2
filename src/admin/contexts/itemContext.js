@@ -17,12 +17,12 @@ export const ItemProvider = ({ children }) => {
   const handleCloseSnackbar = () => setSnackbar(null);
 
   const getData = async () => {
-    const response = await api.get(`cataloging/item/${item_id}`);
+    const response = await api.get(`cataloguing/item/${item_id}`);
     setItem(response.data);
   };
 
   const getExemplar = async () => {
-    const response = await api.get(`cataloging/exemplar/${item_id}`);
+    const response = await api.get(`cataloguing/exemplar/${item_id}`);
     const exm = response.data.exemplares.map((i) => {
       return {
         id: i.id,

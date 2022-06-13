@@ -13,7 +13,7 @@ export default function Record(props) {
 
 
  function getImagem() {
-   if (item) {
+   if (item?.datafields[856]) {
     let [f] = item.datafields[856].filter((field) => {return field.subfields[3] == 'capa'})
      return f
    } else {

@@ -103,6 +103,10 @@ const [tag856] = schema.datafields.filter((field) => {
   return field.tag == "856";
 });
 
+const [tag852] = schema.datafields.filter((field) => {
+  return field.tag == "852";
+});
+
 export default function CreateBook(props) {
   const router = useRouter();
   const [value, setValue] = useState(0);
@@ -331,13 +335,7 @@ export default function CreateBook(props) {
             }
           >
           <Subject />
-            {/* <Datafield
-              control={control}
-              metadata={tag650}
-              fields={Fields650}
-              append={Append650}
-              remove={Remove650}
-            /> */}
+          
           </Box>
           <Box
             sx={
@@ -357,6 +355,8 @@ export default function CreateBook(props) {
               value == 8 ? { display: "grid", rowGap: 3 } : { display: "none" }
             }
           >
+          <Datafield control={control} metadata={tag852} />
+
             <Datafield
               control={control}
               metadata={tag856}
