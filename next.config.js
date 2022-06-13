@@ -5,7 +5,8 @@ const nextConfig = {
     domains: [
       'images-na.ssl-images-amazon.com', 
       'm.media-amazon.com',
-      'localhost'
+      'localhost',
+      'photos.app.goo.gl'
     ],
   },
 }

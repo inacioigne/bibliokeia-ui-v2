@@ -52,8 +52,9 @@ const [tag700] = schema.datafields.filter((field) => {
 const [tag856] = schema.datafields.filter((field) => {
   return field.tag == "856";
 });
-
+ 
 export default function ItemEdit({ item, id }) {
+  
 
   const router = useRouter();
 
@@ -87,11 +88,16 @@ export default function ItemEdit({ item, id }) {
         subfields: {a: ''}
       }
     ]
- 
-
   }
 
-
+  if (!item.datafields['856']) {
+    item.datafields['856'] = [
+      {
+        indicators: {Ind1: '1', Ind2: '2'},
+        subfields: {u: '', 3: ''}
+      }
+    ]
+  }
 
   const {
     control,
@@ -162,7 +168,7 @@ export default function ItemEdit({ item, id }) {
       /** POST ITEM */
     }
     api
-      .put(`/cataloging/item/${id}`, marc)
+      .put(`/cataloguing/item/${id}`, marc)
       .then(function (response) {
         console.log('PUT: ', response )
         if (response.status == 200) {
@@ -306,6 +312,7 @@ export default function ItemEdit({ item, id }) {
         <Box
           sx={value == 8 ? { display: "grid", rowGap: 3 } : { display: "none" }}
         >
+          
           <DatafieldEdit
             control={control}
             item={item}
@@ -319,14 +326,12 @@ export default function ItemEdit({ item, id }) {
           variant="outlined"
           sx={{ m: 2 }}
           type="submit"
-          // onClick={() => {
-          //   console.log(errors.datafields);
-          // }}
+  
         >
           Salvar
         </Button>
       </form>
-      {/* {errors.datafields && <h1>ERROOUUU</h1>} */}
+
       <Snackbar
           open={snack}
           autoHideDuration={6000}

@@ -630,7 +630,7 @@
           "label": "c - Localização na estante"
         }
       ]
-    },
+    }, 
     {
       "tag": "856",
       "repeatable": true,

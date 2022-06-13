@@ -7,13 +7,8 @@ import {
   Container,
   InputBase,
   IconButton,
-  //Card,
-  //CardContent,
-  //Typography,
-  //Button,
 } from "@mui/material/";
 import SearchIcon from "@mui/icons-material/Search";
-
 import { api } from "src/services/api"
 import CardList from "src/admin/components/cataloguing/display_item/card_list_item"
 

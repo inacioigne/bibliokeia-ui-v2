@@ -24,9 +24,13 @@ import {
     remove,
   }) {
     if (metadata.repeatable) {
+      console.log('IMG: ', metadata, fields )
+      
       return (
         <Box>
+          
           {fields.map((field, index) => (
+            
             <Box
               key={index}
               sx={{
