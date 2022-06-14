@@ -10,6 +10,7 @@ import {
 import Image from "next/image";
 import Link from 'next/link'
 import { purple } from "@mui/material/colors";
+import { useState, useEffect, useContext } from "react";
 
 export default function CardList({
   title,
@@ -21,18 +22,12 @@ export default function CardList({
   cdd,
   cutter,
   resources,
-  itemId
+  itemId,
+  img
 }) {
 
-  let img = false
+  const [itemImg, setItemImg] = useState(null);
 
-  if (resources) {
-    let [img] = resources.filter(function (resource) {
-      return resource.subfields['3'] === 'capa'
-    }
-    ) 
-
-  } 
 
   const SubjectButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(purple[500]),
@@ -48,7 +43,7 @@ export default function CardList({
     {img ?
       <Image
         src={
-            img.subfields.u
+          img
         }
         width={155}
         height={200}

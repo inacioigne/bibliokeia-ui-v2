@@ -49,6 +49,7 @@ export default function Acervo({ data }) {
             cdd={item.marc.datafields['082'].subfields.a}
             cutter={item.marc.datafields['090'].subfields.b}
             resources={item.marc.datafields['856']}
+            img={item.img}
             itemId={item.id}
             />
             

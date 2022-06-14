@@ -4,23 +4,25 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import Skeleton from '@mui/material/Skeleton';
 import { red } from "@mui/material/colors";
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { ItemContext } from "src/admin/contexts/itemContext";
+import UploadImg from "src/admin/components/cataloguing/display_item/upload"
 
 
 export default function Record(props) {
   const { item } = useContext(ItemContext);
+  
 
 
- function getImagem() {
-   if (item?.datafields[856]) {
-    let [f] = item.datafields[856].filter((field) => {return field.subfields[3] == 'capa'})
-     return f
-   } else {
-     return false
-   }
- }
- const img = getImagem(props)
+//  function getImagem() {
+//    if (item?.datafields[856]) {
+//     let [f] = item.datafields[856].filter((field) => {return field.subfields[3] == 'capa'})
+//      return f
+//    } else {
+//      return false
+//    }
+//  }
+//  const img = getImagem(props)
 
   
 
@@ -36,7 +38,9 @@ export default function Record(props) {
 
       <Box sx={{ display: "flex", gap: 2 }}>
       {/** IMAGEM */}
-      {img ?
+      <UploadImg />
+
+     {/*  {img ?
         <Image
           src={img.subfields.u}
           width={155}
@@ -45,7 +49,7 @@ export default function Record(props) {
          :
         <Skeleton variant="rectangular" width={155} height={200} />
       }
-      
+       */}
 
         <Box sx={{ display: "flex", gap: 1, flexDirection: "column" }}>
           {/** Autoria */}
@@ -108,7 +112,7 @@ export default function Record(props) {
           <ButtonGroup variant="outlined" aria-label="outlined button group">
             <Button>Chamada</Button>
             <Button style={{ textTransform: "none" }}>
-              {`${item.datafields["082"].subfields.a} ${item.datafields["090"].subfields.b}`}
+              {`${item.datafields["090"].subfields.a}`}
             </Button>
           </ButtonGroup> :
           <Skeleton variant="rectangular" width={250} height={35} /> }
