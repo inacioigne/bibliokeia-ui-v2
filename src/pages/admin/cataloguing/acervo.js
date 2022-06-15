@@ -23,15 +23,17 @@ import { Controller } from "react-hook-form";
 export default function Acervo({ docs }) {
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      firstName: '',
-      select: {}
+      "search": ''
     }
   });
+
+  const onSubmit = data => console.log(data);
 
   return (
     <Container>
       <Box sx={{display: "flex", m: 2, justifyContent: "center"}}>
       {/* <TextField id="outlined-basic" label="Busca" size={"small"} variant="outlined" /> */}
+      <form  onSubmit={handleSubmit(onSubmit)}>
       <Controller
         name="search"
         control={control}
@@ -42,10 +44,13 @@ export default function Acervo({ docs }) {
         size={"small"}
          />}
       />
-      <IconButton aria-label="search" size="large">
+      <IconButton 
+      onClick={handleSubmit(onSubmit)}
+      aria-label="search" size="large">
       <SearchIcon />
 
       </IconButton>
+      </form>
      
 
       </Box>
