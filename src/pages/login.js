@@ -1,8 +1,8 @@
 import { Container, Snackbar, Alert } from "@mui/material/";
 import { useState, useContext } from "react";
-import { AuthContext } from "src/auth/authContext";
-import FormLogin from "src/auth/formLogin";
-import FormRegister from "src/auth/formRegister";
+import { AuthContext } from "src/admin/auth/authContext";
+import FormLogin from "src/admin/auth/formLogin";
+import FormRegister from "src/admin/auth/formRegister";
 
 
 export default function Login() {

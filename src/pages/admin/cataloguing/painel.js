@@ -1,4 +1,4 @@
-import { DashboardLayout } from "src/layouts/dashboard-layout";
+import { DashboardLayout } from "src/admin/layouts/dashboard-layout";
 import Layout from "src/layouts/layoutMain";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "src/theme";

@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import "nprogress/nprogress.css";
 import NProgress from 'nprogress'
 import { useRouter } from 'next/router'
-import { AuthProvider } from "src/auth/authContext";
+import { AuthProvider } from "src/admin/auth/authContext";
 import { useEffect } from 'react'
 
 
